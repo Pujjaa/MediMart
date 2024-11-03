@@ -59,7 +59,7 @@
                   <ul class="dropdown">
                     <li><a class="bg-dark text-light" href="{{url('/adminSup')}}" >Supplements</a></li>
                     
-                    <li><a href="{{url('/adminSupVit')}}">Vitamins</a></li>
+                    <li><a href="{{url('/shop')}}">Vitamins</a></li>
                       
                     
                     <li><a href="{{url('/shop')}}">Minerals</a></li>
@@ -72,13 +72,16 @@
                 </li>
                 <li><a href="{{url('/about')}}">About</a></li>
                 <li><a href="{{url('/contact')}}">Message</a></li>
-                <li class="active"><a href="{{url('/userInfo')}}">User Details</a></li>
+                <li><a href="{{url('/userInfo')}}">User Details</a></li>
 
               </ul>
             </nav>
           </div>
           <div class="icons">
             <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
+            <a href="{{url('/loginView')}}" class="icons-btn d-inline-block bag">
+              <span class="icon-shopping-bag"></span>
+            </a>
             </div>
             <div class="dropdown">
               <button class="btn btn-sm btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
@@ -95,8 +98,7 @@
     </div>
 
     <!-- nav bar close -->
-  
-  
+
 
     <div class="bg-light py-3">
       <div class="container">
@@ -104,91 +106,87 @@
         <div class="row">
           <div class="col-md-12 mb-0">
             <a href="{{url('/home')}}">Home</a> <span class="mx-2 mb-0">/</span>
-            <strong class="text-black">User Details</strong>
+            <strong class="text-black">Add products</strong>
           </div>
         </div>
       </div>
     </div>
     
-    <div class="py-5">
+<!-- form section start -->
+@if(session('message'))
+        <div class="alert alert-success">
+            {{session('message')}}
+        </div>
+@endif 
+<div class="site-section">
       <div class="container">
         <div class="row">
-          <div class="col-lg-6">
-            <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter by Order Price</h3>
-            <div id="slider-range" class="border-primary"></div>
-            <input type="text" name="text" id="amount" class="form-control border-0 pl-0 bg-white" disabled="" />
+          <div class="col-md-12">
+            <h2 class="h3 mb-5 text-black">Add Products:</h2>
           </div>
-          <div class="col-lg-6 text-lg-right">
-            <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter</h3>
-            <button type="button" class="btn btn-primary btn-md dropdown-toggle px-4" id="dropdownMenuReference"
-              data-toggle="dropdown">Reference</button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuReference">
-              <a class="dropdown-item" href="{{url('/shop')}}">Relevance</a>
-              <a class="dropdown-item" href="{{url('/shop')}}">Recent</a>
-              <a class="dropdown-item" href="{{url('/shop')}}">Older to Newest</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{{url('/shop')}}">Price, low to high</a>
-              <a class="dropdown-item" href="{{url('/shop')}}">Price, high to low</a>
-            </div>
-          </div>
+          <div class="col-md-12">
+          @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $er)
+                <li>{{$er}}</li>
+                @endforeach
+            </ul>
         </div>
-      </div>
-    </div>
-    @if(isset($allInfo))
- 
-    <div class="site-section bg-light">
-      <div class="container">
-      @foreach($allInfo->all() as $all)
-        <div class="col shadow">
+        @endif
+
+          <form action="{{url('/addProSub')}}" method="post" enctype="multipart/form-data">
+            @csrf
+                <div class="form-group row">
+                    <label class="form-label" for="form3Example1m">Name</label>
+                      <input type="text" name="name" id="form3Example1m" class="form-control form-control-lg" />
+                </div>
+                <div class="form-group row">
+                    <label class="form-label" for="form3Example1m">Image</label>
+                      <input type="file" name="image" id="form3Example1m" class="form-control" />
+                </div>
+
+                <div class="form-group row">
+                <label class="form-label" for="form3Example90">Price</label>
+                  <input type="number" id="form3Example90" name="price" class="form-control form-control-lg" />  
+                </div>
+  
+                <div class="form-group row">
+                  <label class="form-label" for="form3Example8">Category</label>
+                    <select data-mdb-select-init name="category">
+                      <option value="">Category</option>
+                      <option value="Vitamins">Vitamins</option>
+                      <option value="Minerals">Minerals</option>
+                      <option value="Herbals">Herbals</option>
+                      <option value="Proteins">Proteins</option>
+                      <option value="Probiotics">Probiotics</option>
+                      <option value="Imune">Imune</option>
+                    </select>
+
+                  </div>
+
+                  <div class="form-group row">
+                <label class="form-label" for="form3Example90">Description</label>
+                    <textarea name="description" id="message" cols="30" rows="7" class="form-control"></textarea>  
+                </div>
+                  
+
+                <div class="form-group">
+                  <button  type="reset" class="btn btn-outline-danger">Reset all</button>
+                
+          <button type="submit" class="btn btn-outline-primary">Submit form</button>
        
-          <div class="row-sm-6 row-lg-4 text-center item mb-4 item-v2">
-            <h3 class="text-dark"><a href="{{url('/loginView')}}">{{$all->name}}</a></h3>
-            <span class="text-dark">Email: </span>{{$all->email}}
-            <span class="text-dark">Contact: </span>{{$all->phone}}
-            <span class="text-dark">Gender: </span>{{$all->gender}}
-            <span class="text-dark">Address: </span>{{$all->address}}
-            <p><a href="{{url('/loginView')}}" class="btn btn-sm btn-outline-danger" style="color:red;">Block</a>
-            <a href="{{url('/loginView')}}" class="btn btn-sm btn-primary" style="color:white;">Unblock</a></p>
-            <div><a class="font-weight-bold" href="{{url('/loginView')}}">Order Details</a></div>
           </div>
           
         </div>
-        @endforeach
       </div>
-    </div>
-    
-    @endif
-    <div class="site-section bg-light">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <h2 class="text-black mb-4">Offices</h2>
-          </div>
-          <div class="col-lg-4">
-            <div class="p-4 bg-white mb-3 rounded">
-              <span class="d-block text-black h6 text-uppercase">New York</span>
-              <p class="mb-0">203 Fake St. Mountain View, San Francisco, California, USA</p>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="p-4 bg-white mb-3 rounded">
-              <span class="d-block text-black h6 text-uppercase">London</span>
-              <p class="mb-0">203 Fake St. Mountain View, San Francisco, California, USA</p>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="p-4 bg-white mb-3 rounded">
-              <span class="d-block text-black h6 text-uppercase">Canada</span>
-              <p class="mb-0">203 Fake St. Mountain View, San Francisco, California, USA</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      
     </div>
 
-   <!-- footer start -->
-   <footer class="site-footer bg-light">
+    <!-- form section end -->
+
+
+       <!-- footer start -->
+       <footer class="site-footer bg-light">
       <div class="container">
         <div class="row">
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">

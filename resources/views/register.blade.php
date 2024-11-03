@@ -100,6 +100,8 @@
       </div>
     </div>
 
+
+<!-- form section start -->
     <div class="site-section">
       <div class="container">
         <div class="row">
@@ -201,6 +203,8 @@
         </div>
       </div>
     </div>
+
+    <!-- form section end -->
 
     <div class="site-section bg-light">
       <div class="container">

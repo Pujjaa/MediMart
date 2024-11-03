@@ -12,6 +12,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\PatientProfileController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\MedicineController;
 
 //without login
 
@@ -38,9 +39,19 @@ Route::post('/register', [RegisterController::class,'register']);
 // Admin routes 
 Route::get('/adminHome', [DashboardController::class,'adminHome']);
 Route::get('/userInfo', [DashboardController::class,'userInfo']);
+Route::get('/adminMsg', [DashboardController::class,'adminMessage']);
 Route::get('/adminAccount', [DashboardController::class,'accountInfo']);
 Route::get('/adminEdit{id}', [DashboardController::class,'adminEditView']);
 Route::get('/adminEditSub', [DashboardController::class,'adminEdit']);
+
+//admin products
+Route::get('/adminSup', [MedicineController::class,'supView']);
+Route::get('/adminSupVit', [MedicineController::class,'vitView']);
+Route::get('/adminSupMin', [MedicineController::class,'minView']);
+Route::get('/addProduct', [MedicineController::class,'addProView']);
+Route::post('/addProSub', [MedicineController::class,'addProSub']);
+
+
 
 //Patient routes
 Route::get('/patHome', [PatientProfileController::class,'patHome']);

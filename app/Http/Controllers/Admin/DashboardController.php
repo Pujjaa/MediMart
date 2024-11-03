@@ -14,6 +14,11 @@ class DashboardController extends Controller
         return view('adminhome');
     }
 
+    public function adminMessage(){
+        $allMes=DB::table('messages')->get();
+        return view('admin_message')->with(['mesInfo'=>$allMes]);
+    } 
+
     public function userInfo(){
         $allData=DB::table('users')->where('role','=','Patient')->get();
         return view('user_info')->with(['allInfo'=>$allData]);

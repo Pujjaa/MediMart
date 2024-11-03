@@ -52,18 +52,21 @@
           <div class="main-nav d-none d-lg-block">
             <nav class="site-navigation text-right text-md-center" role="navigation">
               <ul class="site-menu js-clone-nav d-none d-lg-block">
-                <li class="active"><a href="{{url('/adminHome')}}">Home</a></li>
+                <li><a href="{{url('/adminHome')}}">Home</a></li>
                 <li><a href="{{url('/')}}">Company</a></li>
                 <li class="has-children">
-                  <a>Medicine</a>
+                  <a>Products</a>
                   <ul class="dropdown">
-                    <li><a href="{{url('/shop')}}">Supplements</a></li>
+                    <li><a class="bg-dark text-light" href="{{url('/adminSup')}}" >Supplements</a></li>
                     
-                    <li><a href="{{url('/shop')}}">Vitamins</a></li>
+                    <li><a href="{{url('/adminSupVit')}}">Vitamins</a></li>
                       
                     
-                    <li><a href="{{url('/shop')}}">Diet &amp; Nutrition</a></li>
-                    <li><a href="{{url('/shop')}}">Tea &amp; Coffee</a></li>
+                    <li><a href="{{url('/shop')}}">Minerals</a></li>
+                    <li><a href="{{url('/shop')}}">Herbal</a></li>
+                    <li><a href="{{url('/shop')}}">Protein and Fitness</a></li>
+                    <li><a href="{{url('/shop')}}">Probiotics and Digestive</a></li>
+                    <li><a href="{{url('/shop')}}">Imune System</a></li>
                     
                   </ul>
                 </li>
@@ -76,16 +79,14 @@
           </div>
           <div class="icons">
             <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
-            <a href="{{url('/loginView')}}" class="icons-btn d-inline-block bag">
-              <span class="icon-shopping-bag"></span>
-            </a>
+            
             </div>
             <div class="dropdown">
-              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+              <button class="btn btn-sm btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
                 Admin
                 </button>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">My account</a>
+                <a class="dropdown-item" href="{{url('adminAccount')}}">My account</a>
                 <a class="dropdown-item" href="#">Log out</a>
               </div>
             </div>
@@ -123,7 +124,7 @@
 
 
 <!-- section -->
-<div class="container-fluid pt-5">
+      <div class="container-fluid pt-5">
         <div class="row px-xl-5 pb-3">
             <div class="col-lg-6 col-md-6 col-sm-12 pb-1">
                 <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">

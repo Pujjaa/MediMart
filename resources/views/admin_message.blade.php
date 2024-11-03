@@ -110,54 +110,33 @@
       </div>
     </div>
     
-    <div class="py-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6">
-            <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter by Order Price</h3>
-            <div id="slider-range" class="border-primary"></div>
-            <input type="text" name="text" id="amount" class="form-control border-0 pl-0 bg-white" disabled="" />
-          </div>
-          <div class="col-lg-6 text-lg-right">
-            <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter</h3>
-            <button type="button" class="btn btn-primary btn-md dropdown-toggle px-4" id="dropdownMenuReference"
-              data-toggle="dropdown">Reference</button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuReference">
-              <a class="dropdown-item" href="{{url('/shop')}}">Relevance</a>
-              <a class="dropdown-item" href="{{url('/shop')}}">Recent</a>
-              <a class="dropdown-item" href="{{url('/shop')}}">Older to Newest</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{{url('/shop')}}">Price, low to high</a>
-              <a class="dropdown-item" href="{{url('/shop')}}">Price, high to low</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    @if(isset($allInfo))
+   
+ 
  
     <div class="site-section bg-light">
       <div class="container">
-      @foreach($allInfo->all() as $all)
-        <div class="col shadow">
-       
-          <div class="row-sm-6 row-lg-4 text-center item mb-4 item-v2">
-            <h3 class="text-dark"><a href="{{url('/loginView')}}">{{$all->name}}</a></h3>
-            <span class="text-dark">Email: </span>{{$all->email}}
-            <span class="text-dark">Contact: </span>{{$all->phone}}
-            <span class="text-dark">Gender: </span>{{$all->gender}}
-            <span class="text-dark">Address: </span>{{$all->address}}
-            <p><a href="{{url('/loginView')}}" class="btn btn-sm btn-outline-danger" style="color:red;">Block</a>
-            <a href="{{url('/loginView')}}" class="btn btn-sm btn-primary" style="color:white;">Unblock</a></p>
-            <div><a class="font-weight-bold" href="{{url('/loginView')}}">Order Details</a></div>
-          </div>
-          
-        </div>
-        @endforeach
+      
+<!-- main section start -->
+ @if(isset($mesInfo))
+<div class="row text-dark">
+@foreach($mesInfo->all() as $msg)
+<div class="shadow card border-light mb-3" style="max-width: 18rem; margin-left: 2%; margin-top: 1%;">
+  <div class="card-header font-weight-bold">{{$msg->fname}} {{$msg->lname}}</div>
+  <div class="card-body">
+    <h5 class="card-title">Reason: {{$msg->subject}}</h5>
+    <p class="card-text">{{$msg->message}}</p>
+    <a href="" class="btn btn-sm btn-outline-primary">Reply</a>
+  </div>
+
+</div>
+@endforeach
+<div>
+@endif
+<!-- main section end -->
       </div>
     </div>
     
-    @endif
+ 
     <div class="site-section bg-light">
       <div class="container">
         <div class="row">
@@ -255,3 +234,7 @@
 </body>
 
 </html>
+
+
+
+

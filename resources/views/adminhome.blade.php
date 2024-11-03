@@ -55,20 +55,23 @@
                 <li class="active"><a href="{{url('/adminHome')}}">Home</a></li>
                 <li><a href="{{url('/')}}">Company</a></li>
                 <li class="has-children">
-                  <a>Medicine</a>
+                  <a>Products</a>
                   <ul class="dropdown">
-                    <li><a href="{{url('/shop')}}">Supplements</a></li>
+                    <li><a class="bg-dark text-light" href="{{url('/adminSup')}}" >Supplements</a></li>
                     
-                    <li><a href="{{url('/shop')}}">Vitamins</a></li>
+                    <li><a href="{{url('/adminSupVit')}}">Vitamins</a></li>
                       
                     
-                    <li><a href="{{url('/shop')}}">Diet &amp; Nutrition</a></li>
-                    <li><a href="{{url('/shop')}}">Tea &amp; Coffee</a></li>
+                    <li><a href="{{url('/adminSupMin')}}">Minerals</a></li>
+                    <li><a href="{{url('/shop')}}">Herbal</a></li>
+                    <li><a href="{{url('/shop')}}">Protein and Fitness</a></li>
+                    <li><a href="{{url('/shop')}}">Probiotics and Digestive</a></li>
+                    <li><a href="{{url('/shop')}}">Imune System</a></li>
                     
                   </ul>
                 </li>
                 <li><a href="{{url('/about')}}">About</a></li>
-                <li><a href="{{url('/contact')}}">Message</a></li>
+                <li><a href="{{url('/adminMsg')}}">Message</a></li>
                 <li><a href="{{url('/userInfo')}}">User Details</a></li>
 
               </ul>
@@ -76,12 +79,10 @@
           </div>
           <div class="icons">
             <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
-            <a href="{{url('/loginView')}}" class="icons-btn d-inline-block bag">
-              <span class="icon-shopping-bag"></span>
-            </a>
+            
             </div>
             <div class="dropdown">
-              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+              <button class="btn btn-sm btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
                 Admin
                 </button>
               <div class="dropdown-menu">
@@ -95,8 +96,6 @@
     </div>
 
     <!-- nav bar close -->
-  
-  
 
     <div class="owl-carousel owl-single px-0">
       <div class="site-blocks-cover overlay" style="background-image: url('images/hero_bg.jpg');">

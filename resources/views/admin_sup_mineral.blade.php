@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="fonts/icomoon/style.css">
 
   <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -59,9 +60,7 @@
                   <ul class="dropdown">
                     <li><a class="bg-dark text-light" href="{{url('/adminSup')}}" >Supplements</a></li>
                     
-                    <li><a href="{{url('/adminSupVit')}}">Vitamins</a></li>
-                      
-                    
+                    <li><a href="{{url('/shop')}}">Vitamins</a></li>
                     <li><a href="{{url('/shop')}}">Minerals</a></li>
                     <li><a href="{{url('/shop')}}">Herbal</a></li>
                     <li><a href="{{url('/shop')}}">Protein and Fitness</a></li>
@@ -72,13 +71,13 @@
                 </li>
                 <li><a href="{{url('/about')}}">About</a></li>
                 <li><a href="{{url('/contact')}}">Message</a></li>
-                <li class="active"><a href="{{url('/userInfo')}}">User Details</a></li>
-
+                <li><a href="{{url('/userInfo')}}">User Details</a></li>
               </ul>
             </nav>
           </div>
           <div class="icons">
             <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
+            
             </div>
             <div class="dropdown">
               <button class="btn btn-sm btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
@@ -95,8 +94,7 @@
     </div>
 
     <!-- nav bar close -->
-  
-  
+
 
     <div class="bg-light py-3">
       <div class="container">
@@ -104,91 +102,59 @@
         <div class="row">
           <div class="col-md-12 mb-0">
             <a href="{{url('/home')}}">Home</a> <span class="mx-2 mb-0">/</span>
-            <strong class="text-black">User Details</strong>
+            <a href="{{url('/adminSup')}}">Supplements</a> <span class="mx-2 mb-0">/</span>
+            <strong class="text-black">Vitamins</strong>
           </div>
         </div>
       </div>
     </div>
     
-    <div class="py-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6">
-            <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter by Order Price</h3>
-            <div id="slider-range" class="border-primary"></div>
-            <input type="text" name="text" id="amount" class="form-control border-0 pl-0 bg-white" disabled="" />
-          </div>
-          <div class="col-lg-6 text-lg-right">
-            <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter</h3>
-            <button type="button" class="btn btn-primary btn-md dropdown-toggle px-4" id="dropdownMenuReference"
-              data-toggle="dropdown">Reference</button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuReference">
-              <a class="dropdown-item" href="{{url('/shop')}}">Relevance</a>
-              <a class="dropdown-item" href="{{url('/shop')}}">Recent</a>
-              <a class="dropdown-item" href="{{url('/shop')}}">Older to Newest</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{{url('/shop')}}">Price, low to high</a>
-              <a class="dropdown-item" href="{{url('/shop')}}">Price, high to low</a>
-            </div>
-          </div>
+<!-- section -->
+<div class="container-fluid">
+
+  <div class="card-body">
+    <h5 class="card-title">Add more</h5>
+    <a href="{{url('/addProduct')}}" class="btn btn-lg btn-primary">+ Add</a>
+  </div>
+</div>
+@if(isset($allMineral))
+
+<div class="container-fluid pt-3">
+  <div class="card-columns">
+    @foreach($allMineral->all() as $allMin)
+  <div class="row row-cols-1 row-cols-md-3">
+  <div class="col mb-4">
+    <div class="card h-100">
+      <img src="{{$allMin->image}}" class="card-img-top" alt="...">
+      <div class="d-flex align-items-center justify-content-center mb-1">
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star-half-alt text-primary mr-1"></small>
+                            <small>({{$allMin->rate}})</small>
         </div>
-      </div>
-    </div>
-    @if(isset($allInfo))
- 
-    <div class="site-section bg-light">
-      <div class="container">
-      @foreach($allInfo->all() as $all)
-        <div class="col shadow">
-       
-          <div class="row-sm-6 row-lg-4 text-center item mb-4 item-v2">
-            <h3 class="text-dark"><a href="{{url('/loginView')}}">{{$all->name}}</a></h3>
-            <span class="text-dark">Email: </span>{{$all->email}}
-            <span class="text-dark">Contact: </span>{{$all->phone}}
-            <span class="text-dark">Gender: </span>{{$all->gender}}
-            <span class="text-dark">Address: </span>{{$all->address}}
-            <p><a href="{{url('/loginView')}}" class="btn btn-sm btn-outline-danger" style="color:red;">Block</a>
-            <a href="{{url('/loginView')}}" class="btn btn-sm btn-primary" style="color:white;">Unblock</a></p>
-            <div><a class="font-weight-bold" href="{{url('/loginView')}}">Order Details</a></div>
-          </div>
-          
-        </div>
-        @endforeach
-      </div>
-    </div>
-    
-    @endif
-    <div class="site-section bg-light">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <h2 class="text-black mb-4">Offices</h2>
-          </div>
-          <div class="col-lg-4">
-            <div class="p-4 bg-white mb-3 rounded">
-              <span class="d-block text-black h6 text-uppercase">New York</span>
-              <p class="mb-0">203 Fake St. Mountain View, San Francisco, California, USA</p>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="p-4 bg-white mb-3 rounded">
-              <span class="d-block text-black h6 text-uppercase">London</span>
-              <p class="mb-0">203 Fake St. Mountain View, San Francisco, California, USA</p>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="p-4 bg-white mb-3 rounded">
-              <span class="d-block text-black h6 text-uppercase">Canada</span>
-              <p class="mb-0">203 Fake St. Mountain View, San Francisco, California, USA</p>
-            </div>
-          </div>
-        </div>
+      <div class="card-body text-dark">
+        <h5 class="card-title">{{$allMin->name}}</h5>
+        <p class="card-text">₹{{$allMin->price}}</p>
+        <p class="card-text">{{$allMin->description}}</p>
+        <a href="" class="btn btn-sm btn-primary">Edit</a>
+      <a href="" class="btn btn-sm btn-danger">Delete</a>
       </div>
       
     </div>
+  </div>
+</div>
+@endforeach
+  
+  </div>       
+</div>
+@endif
+    <!-- end section -->
 
-   <!-- footer start -->
-   <footer class="site-footer bg-light">
+
+       <!-- footer start -->
+       <footer class="site-footer bg-light">
       <div class="container">
         <div class="row">
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
