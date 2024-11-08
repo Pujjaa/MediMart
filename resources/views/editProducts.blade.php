@@ -53,7 +53,7 @@
           <div class="main-nav d-none d-lg-block">
             <nav class="site-navigation text-right text-md-center" role="navigation">
               <ul class="site-menu js-clone-nav d-none d-lg-block">
-                <li><a href="{{url('/adminHome')}}">Home</a></li>
+                <li class="active"><a href="{{url('/adminHome')}}">Home</a></li>
                 
                 <li class="has-children">
                   <a>Products</a>
@@ -72,7 +72,7 @@
                   </ul>
                 </li>
                 <li><a href="{{url('/adminAbout')}}">About</a></li>
-                <li class="active"><a href="{{url('/adminMsg')}}">Message</a></li>
+                <li><a href="{{url('/adminMsg')}}">Message</a></li>
                 <li><a href="{{url('/userInfo')}}">User Details</a></li>
                 <li class="has-children">
                   <a>Orders</a>
@@ -105,8 +105,7 @@
     </div>
 
     <!-- nav bar close -->
-  
-  
+
 
     <div class="bg-light py-3">
       <div class="container">
@@ -114,70 +113,78 @@
         <div class="row">
           <div class="col-md-12 mb-0">
             <a href="{{url('/adminHome')}}">Home</a> <span class="mx-2 mb-0">/</span>
-            <strong class="text-black">User Details</strong>
+            <strong class="text-black">Edit products</strong>
           </div>
         </div>
       </div>
     </div>
     
-   
- 
- 
-    <div class="site-section bg-light">
+<!-- form section start -->
+@if(session('message'))
+        <div class="alert alert-success">
+            {{session('message')}}
+        </div>
+@endif 
+<div class="site-section">
       <div class="container">
-      
-<!-- main section start -->
- @if(isset($mesInfo))
-<div class="row text-dark">
-@foreach($mesInfo->all() as $msg)
-<div class="shadow card border-light mb-3" style="max-width: 18rem; margin-left: 2%; margin-top: 1%;">
-  <div class="card-header font-weight-bold">{{$msg->fname}} {{$msg->lname}}</div>
-  <div class="card-body">
-    <h5 class="card-title">Reason: {{$msg->subject}}</h5>
-    <p class="card-text">{{$msg->message}}</p>
-    <a href="" class="btn btn-sm btn-outline-primary">Reply</a>
-  </div>
-
-</div>
-@endforeach
-<div>
-@endif
-<!-- main section end -->
-      </div>
-    </div>
-    
- 
-    <div class="site-section bg-light">
-      <div class="container">
+      @if(isset($editMed))
         <div class="row">
-          <div class="col-12">
-            <h2 class="text-black mb-4">Offices</h2>
+          <div class="col-md-12">
+            <h2 class="h3 mb-5 text-black">Edit Products:</h2>
           </div>
-          <div class="col-lg-4">
-            <div class="p-4 bg-white mb-3 rounded">
-              <span class="d-block text-black h6 text-uppercase">New York</span>
-              <p class="mb-0">203 Fake St. Mountain View, San Francisco, California, USA</p>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="p-4 bg-white mb-3 rounded">
-              <span class="d-block text-black h6 text-uppercase">London</span>
-              <p class="mb-0">203 Fake St. Mountain View, San Francisco, California, USA</p>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="p-4 bg-white mb-3 rounded">
-              <span class="d-block text-black h6 text-uppercase">Canada</span>
-              <p class="mb-0">203 Fake St. Mountain View, San Francisco, California, USA</p>
-            </div>
-          </div>
+        
+          @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $er)
+                <li>{{$er}}</li>
+                @endforeach
+            </ul>
         </div>
+        @endif
+
+          <form action="{{url('/editProuct')}}" method="post" enctype="multipart/form-data">
+            @csrf
+            <input type="hidden" name="eid" value="{{$editMed->id}}">
+            <input type="hidden" name="cat" value="{{$editMed->category}}">
+                <div class="form-group row">
+                    <label class="form-label" for="form3Example1m">Name</label>
+                      <input type="text" name="name" id="form3Example1m" class="form-control form-control-lg" value="{{$editMed->name}}"/>
+                </div>
+                <div class="form-group row">
+                    <label class="form-label" for="form3Example1m">Image</label>
+                      <input type="file" name="image" id="form3Example1m" class="form-control" value="{{$editMed->image}}"/>
+                      <img src="{{$editMed->image}}" height="100" width="100">
+                </div>
+
+                <div class="form-group row">
+                <label class="form-label" for="form3Example90">Price</label>
+                  <input type="number" id="form3Example90" name="price" class="form-control form-control-lg" value="{{$editMed->price}}"/>  
+                </div>
+
+                  <div class="form-group row">
+                <label class="form-label" for="form3Example90">Description</label>
+                    <textarea name="description" id="message" cols="30" rows="7" class="form-control" value="{{$editMed->description}}">{{$editMed->description}}</textarea>  
+                </div>
+                  
+
+                <div class="form-group">
+                  <button  type="reset" class="btn btn-outline-danger">Reset all</button>
+                
+          <button type="submit" class="btn btn-outline-primary">Edit</button>
+       
+          </div>
+          
+        </div>
+        @endif
       </div>
-      
     </div>
 
-   <!-- footer start -->
-   <footer class="site-footer bg-light">
+    <!-- form section end -->
+
+
+       <!-- footer start -->
+       <footer class="site-footer bg-light">
       <div class="container">
         <div class="row">
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
@@ -244,7 +251,3 @@
 </body>
 
 </html>
-
-
-
-

@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
 
+header('Cache-Control: no-cache, no-store, must-revalidate');
+header('Pragma: no-cache');
+header('Expires: 0');
+
 class LoginController extends Controller
 {
     
@@ -24,73 +28,39 @@ class LoginController extends Controller
         }else{
             $dbPassword=$loginData[0]->password;
             $user=$loginData[0]->role;
-            if($password==$dbPassword && $user=='Admin'){
-                return redirect('/adminhome');
-            }elseif($password==$dbPassword){
-                $uid=$loginData[0]->id;
-                $req->session()->put('session_id',$uid);
-                return redirect('/userHome');
+            $auth=$loginData[0]->auth;
+            if($auth==0){
+                if($password==$dbPassword && $user=='Admin'){
+                    $uid=$loginData[0]->id;
+                    $req->session()->put('session_id',$uid);
+                    return redirect('/adminHome');
+                }elseif($password==$dbPassword){
+                    $uid=$loginData[0]->id;
+                    $req->session()->put('session_id',$uid);
+                    return redirect('/patHome');
+                }else{
+                    return redirect('/loginView')->with('message','Wrong Password');
+                }
             }else{
-                return redirect('/loginView')->with('message','Wrong Password');
+                return redirect('/loginView')->with('message','Admin blocked you');
             }
         }                               
     }
 
-    public function userHome(){
-        $userId= session()->get('session_id');
-        $userData=DB::table('users')->where('id','=',$userId)->get();
-        return redirect('/home')->with(['userInfo'=>$userData]); 
+    public function deleteAccount(){
+        $uid = session()->get('session_id');
+        DB::table('users')->where('id','=',$uid)->delete();
+        return redirect('/loginView'); 
+        DB::table('order_details')->where('uid','=',$uid)->delete();
+        DB::table('cart')->where('user_id','=',$uid)->delete();
     }
 
-
-
-    // public function login(Request $req){
-
-    //     $user = $req->input('email'); 
-    //     $pass = $req->input('password'); 
-      
-    //     $logdata = DB::table('users')->where('email', '=', $user)->get();
-        
-    //     if ($logdata->isEmpty()) {
-    //         return redirect('/loginView')->with('message', 'User Not Found');
-    //     } else {
-    //         $dbpass = $logdata[0]->password; 
-    //         $role = $logdata[0]->role; 
-    //         $auth = $logdata[0]->auth; 
-    //         $req->session()->put('session_role', $role);
-            
-    //         if ($pass == $dbpass) {
-    //             $uid = $logdata[0]->user_id;
-    //             $uname = $logdata[0]->name;
-    //             $uemail = $logdata[0]->email;
-    //             $uphone = $logdata[0]->phone;
-                
-    //             $req->session()->put('session_id', $uid);
-                
-    //             if ($auth == 0) {
-    //                 if ($role == 'Admin') {
-    //                     $req->session()->put('session_name', $uname);
-    //                     $req->session()->put('session_email', $uemail);
-    //                     $req->session()->put('session_phone', $uphone);
-                        
-    //                     return redirect('/adminhome');
-    //                 } else {
-    //                     // Setting session values for normal user
-    //                     $req->session()->put('session_name', $uname);
-    //                     $req->session()->put('session_email', $uemail);
-    //                     $req->session()->put('session_phone', $uphone);
-                        
-    //                     return redirect('/home');
-    //                 }
-    //             } else {
-    //                 return redirect('/loginView')->with('message', 'User Blocked, Contact Admin');
-    //             }
-    //         } else {
-    //             return redirect('/loginView')->with('message', 'Password Not Matched');
-    //         }
-    //     }
-    
-    // }
-
+    public function logout(Request $req){
+        $req->session()->invalidate();
+        $req->session()->flush();
+        $req->session()->regenerateToken();
+        $cookie = \Cookie::forget($req->session()->getName());
+        return redirect('/home')->withCookie($cookie);
+    }
 
 }

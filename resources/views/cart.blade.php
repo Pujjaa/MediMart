@@ -2,11 +2,12 @@
 <html lang="en">
 
 <head>
-  <title>Pharmative &mdash; Colorlib Template</title>
+  <title>MediMart</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="fonts/icomoon/style.css">
 
   <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -25,7 +26,10 @@
 
 <body>
 
-  <div class="site-wrap">
+
+  <div class="justify-container">
+
+  <!-- nav bar start -->
 
 
     <div class="site-navbar py-2">
@@ -33,7 +37,7 @@
       <div class="search-wrap">
         <div class="container">
           <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
-          <form action="#" method="post">
+          <form action="#" method="POST">
             <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
           </form>
         </div>
@@ -43,65 +47,74 @@
         <div class="d-flex align-items-center justify-content-between">
           <div class="logo">
             <div class="site-logo">
-              <a href="index.html" class="js-logo-clone"><strong class="text-primary">Pharma</strong>tive</a>
+              <a href="{{url('/patHome')}}" class="js-logo-clone"><strong class="text-primary">Medi</strong>Mart</a>
             </div>
           </div>
           <div class="main-nav d-none d-lg-block">
             <nav class="site-navigation text-right text-md-center" role="navigation">
               <ul class="site-menu js-clone-nav d-none d-lg-block">
-                <li><a href="index.html">Home</a></li>
-                <li class="active"><a href="shop.html">Store</a></li>
+                <li class="active"><a href="{{url('/patHome')}}">Home</a></li>
+                <li><a href="{{url('/patMedView')}}">Store</a></li>
                 <li class="has-children">
-                  <a href="#">Products</a>
+                  <a>Products</a>
                   <ul class="dropdown">
-                    <li><a href="#">Supplements</a></li>
-                    <li class="has-children">
-                      <a href="#">Vitamins</a>
-                      <ul class="dropdown">
-                        <li><a href="#">Supplements</a></li>
-                        <li><a href="#">Vitamins</a></li>
-                        <li><a href="#">Diet &amp; Nutrition</a></li>
-                        <li><a href="#">Tea &amp; Coffee</a></li>
-                      </ul>
-                    </li>
-                    <li><a href="#">Diet &amp; Nutrition</a></li>
-                    <li><a href="#">Tea &amp; Coffee</a></li>
+                    <li><a class="bg-dark text-light" href="{{url('/patMedView')}}" >Supplements</a></li>
+                    
+                    <li><a href="{{url('/patMedVit')}}">Vitamins</a></li>
+                      
+                    
+                    <li><a href="{{url('/patMedMin')}}">Minerals</a></li>
+                    <li><a href="{{url('/patMedHer')}}">Herbal</a></li>
+                    <li><a href="{{url('/patMedPro')}}">Protein and Fitness</a></li>
+                    <li><a href="{{url('/patMedProbio')}}">Probiotics and Digestive</a></li>
+                    <li><a href="{{url('/patMedImu')}}">Imune System</a></li>
                     
                   </ul>
                 </li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="{{url('/patAbout')}}">About</a></li>
+                <li><a href="{{url('/contact')}}">Contact</a></li>
+                <li><a href="{{url('/order')}}">Order</a></li>
               </ul>
             </nav>
           </div>
           <div class="icons">
             <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
-            <a href="cart.html" class="icons-btn d-inline-block bag">
+            <a href="{{url('/cart')}}" class="icons-btn d-inline-block bag">
               <span class="icon-shopping-bag"></span>
-              <span class="number">2</span>
             </a>
-            <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span
-                class="icon-menu"></span></a>
+            
           </div>
+          <div class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                Patient
+                </button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="">My account</a>
+                <a class="dropdown-item" href="/logout">Log out</a>
+              </div>
+            </div>
         </div>
       </div>
     </div>
+
+
+    <!-- nav bar close -->
 
     <div class="bg-light py-3">
       <div class="container">
         <div class="row">
           <div class="col-md-12 mb-0">
-            <a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> 
+            <a href="{{url('/patHome')}}">Home</a> <span class="mx-2 mb-0">/</span> 
             <strong class="text-black">Cart</strong>
           </div>
         </div>
       </div>
     </div>
-
+@if(isset($cart))
     <div class="site-section">
       <div class="container">
         <div class="row mb-5">
-          <form class="col-md-12" method="post">
+          <form class="col-md-12" action="" method="post">
             <div class="site-blocks-table">
               <table class="table table-bordered">
                 <thead>
@@ -114,15 +127,22 @@
                     <th class="product-remove">Remove</th>
                   </tr>
                 </thead>
+                @php
+                $total=0;
+                $userId=session()->get('session_id');
+                @endphp
+
                 <tbody>
+                  @foreach($cart->all() as $crt)
+                  @if($crt->user_id==$userId)
                   <tr>
                     <td class="product-thumbnail">
-                      <img src="images/product_02.png" alt="Image" class="img-fluid">
+                      <img src="{{$crt->image}}" alt="Image" class="img-fluid">
                     </td>
                     <td class="product-name">
-                      <h2 class="h5 text-black">Ibuprofen</h2>
+                      <h2 class="h5 text-black">{{$crt->name}}</h2>
                     </td>
-                    <td>$55.00</td>
+                    <td> ₹{{$crt->price}}</td>
                     <td>
                       <div class="input-group mb-3" style="max-width: 120px;">
                         <div class="input-group-prepend">
@@ -136,34 +156,17 @@
                       </div>
     
                     </td>
-                    <td>$49.00</td>
-                    <td><a href="#" class="btn btn-primary height-auto btn-sm">X</a></td>
+                    @php
+                    $crtPrice=$crt->price;
+                    $total=$total+$crtPrice;
+                    @endphp
+                    <td>{{$total}}</td>
+                    <td><a href="{{url('/removeCart')}}{{$crt->id}}" class="btn btn-primary height-auto btn-sm">X</a></td>
                   </tr>
-    
-                  <tr>
-                    <td class="product-thumbnail">
-                      <img src="images/product_01.png" alt="Image" class="img-fluid">
-                    </td>
-                    <td class="product-name">
-                      <h2 class="h5 text-black">Bioderma</h2>
-                    </td>
-                    <td>$49.00</td>
-                    <td>
-                      <div class="input-group mb-3" style="max-width: 120px;">
-                        <div class="input-group-prepend">
-                          <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
-                        </div>
-                        <input type="text" class="form-control text-center" value="1" placeholder=""
-                          aria-label="Example text with button addon" aria-describedby="button-addon1">
-                        <div class="input-group-append">
-                          <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
-                        </div>
-                      </div>
-    
-                    </td>
-                    <td>$49.00</td>
-                    <td><a href="#" class="btn btn-primary height-auto btn-sm">X</a></td>
-                  </tr>
+                 
+                 @endif
+                @endforeach
+                 
                 </tbody>
               </table>
             </div>
@@ -206,7 +209,7 @@
                     <span class="text-black">Subtotal</span>
                   </div>
                   <div class="col-md-6 text-right">
-                    <strong class="text-black">$230.00</strong>
+                    <strong class="text-black">{{$total}}</strong>
                   </div>
                 </div>
                 <div class="row mb-5">
@@ -214,14 +217,14 @@
                     <span class="text-black">Total</span>
                   </div>
                   <div class="col-md-6 text-right">
-                    <strong class="text-black">$230.00</strong>
+                    <strong class="text-black">{{$total}}</strong>
                   </div>
                 </div>
     
                 <div class="row">
                   <div class="col-md-12">
-                    <button class="btn btn-primary btn-lg btn-block" onclick="window.location='checkout.html'">Proceed To
-                      Checkout</button>
+                    <a href="{{url('/checkout')}}" class="btn btn-primary btn-lg btn-block">Proceed To
+                      Checkout</a>
                   </div>
                 </div>
               </div>
@@ -230,26 +233,28 @@
         </div>
       </div>
     </div>
+  @endif
 
-    <footer class="site-footer">
+      <!-- footer start -->
+      <footer class="site-footer bg-light">
       <div class="container">
         <div class="row">
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
 
             <div class="block-7">
-              <h3 class="footer-heading mb-4">About <strong class="text-primary">Pharmative</strong></h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius quae reiciendis distinctio voluptates
-                sed dolorum excepturi iure eaque, aut unde.</p>
+              <h3 class="footer-heading mb-4">About <strong class="text-primary">MediMart</strong></h3>
+              <p>is the digital pharmacy shop.
+              We are a ONE-STOP ONLINE Healthcare Solutions where we not only provide a wide range of medicines, we also offer a wide choice of healthcare products including wellness products.</p>
             </div>
 
           </div>
           <div class="col-lg-3 mx-auto mb-5 mb-lg-0">
             <h3 class="footer-heading mb-4">Navigation</h3>
             <ul class="list-unstyled">
-              <li><a href="#">Supplements</a></li>
-              <li><a href="#">Vitamins</a></li>
-              <li><a href="#">Diet &amp; Nutrition</a></li>
-              <li><a href="#">Tea &amp; Coffee</a></li>
+              <li><a href="{{url('/patMedView')}}">Supplements</a></li>
+              <li><a href="{{url('/patMedVit')}}">Vitamins</a></li>
+              <li><a href="{{url('/adminSupMin')}}">Minerals</a></li>
+              <li><a href="#">Herbals</a></li>
             </ul>
           </div>
 
@@ -257,9 +262,9 @@
             <div class="block-5 mb-5">
               <h3 class="footer-heading mb-4">Contact Info</h3>
               <ul class="list-unstyled">
-                <li class="address">203 Fake St. Mountain View, San Francisco, California, USA</li>
-                <li class="phone"><a href="tel://23923929210">+2 392 3929 210</a></li>
-                <li class="email">emailaddress@domain.com</li>
+                <li class="address">SaltLake, Sector-5, Kolkata, West Bengal</li>
+                <li class="phone"><a href="tel://23923929210">+91 3923929210</a></li>
+                <li class="email">medicine@medimart.com</li>
               </ul>
             </div>
 
@@ -271,16 +276,18 @@
             <p>
               <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
               Copyright &copy;
-              <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made
+              <script>document.write(new Date().getFullYear());</script> All rights reserved
               with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank"
-                class="text-primary">Colorlib</a>
-              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                class="text-primary">MediMart</a>
+           
             </p>
           </div>
 
         </div>
       </div>
     </footer>
+
+    <!-- footer close -->
   </div>
 
   <script src="js/jquery-3.3.1.min.js"></script>

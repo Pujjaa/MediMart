@@ -53,7 +53,7 @@
           <div class="main-nav d-none d-lg-block">
             <nav class="site-navigation text-right text-md-center" role="navigation">
               <ul class="site-menu js-clone-nav d-none d-lg-block">
-                <li><a href="{{url('/adminHome')}}">Home</a></li>
+                <li class="active"><a href="{{url('/adminHome')}}">Home</a></li>
                 
                 <li class="has-children">
                   <a>Products</a>
@@ -72,7 +72,7 @@
                   </ul>
                 </li>
                 <li><a href="{{url('/adminAbout')}}">About</a></li>
-                <li class="active"><a href="{{url('/adminMsg')}}">Message</a></li>
+                <li><a href="{{url('/adminMsg')}}">Message</a></li>
                 <li><a href="{{url('/userInfo')}}">User Details</a></li>
                 <li class="has-children">
                   <a>Orders</a>
@@ -106,7 +106,6 @@
 
     <!-- nav bar close -->
   
-  
 
     <div class="bg-light py-3">
       <div class="container">
@@ -114,39 +113,73 @@
         <div class="row">
           <div class="col-md-12 mb-0">
             <a href="{{url('/adminHome')}}">Home</a> <span class="mx-2 mb-0">/</span>
-            <strong class="text-black">User Details</strong>
+            <strong class="text-black">Change Password</strong>
           </div>
         </div>
       </div>
     </div>
-    
-   
- 
- 
-    <div class="site-section bg-light">
-      <div class="container">
-      
-<!-- main section start -->
- @if(isset($mesInfo))
-<div class="row text-dark">
-@foreach($mesInfo->all() as $msg)
-<div class="shadow card border-light mb-3" style="max-width: 18rem; margin-left: 2%; margin-top: 1%;">
-  <div class="card-header font-weight-bold">{{$msg->fname}} {{$msg->lname}}</div>
-  <div class="card-body">
-    <h5 class="card-title">Reason: {{$msg->subject}}</h5>
-    <p class="card-text">{{$msg->message}}</p>
-    <a href="" class="btn btn-sm btn-outline-primary">Reply</a>
-  </div>
+    @if(session('message'))
+        <div class="alert alert-warning">
+            {{session('message')}}
+        </div>
+        @endif
 
-</div>
-@endforeach
-<div>
-@endif
-<!-- main section end -->
+
+    <div class="site-section">
+      <div class="container">
+      @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $er)
+                <li>{{$er}}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+        <div class="row">
+          <div class="col-md-12">
+            <h2 class="h3 mb-5 text-black">Login:</h2>
+          </div>
+          <div class="col-md-12">
+
+    
+            <form action="{{url('/chnPassSub')}}" method="post">
+                @csrf
+              <div class="p-3 p-lg-5 border">
+                
+                <div class="form-group row">
+                  <div class="col-md-12">
+                    <label for="oldpass" class="text-black">Old Password <span class="text-danger">*</span></label>
+                    <input type="password" class="form-control" id="password" name="oldpass" placeholder="">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-12">
+                    <label for="newpass" class="text-black">New Password</label>
+                    <input type="password" class="form-control" id="password" name="newpass">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-12">
+                    <label for="cnfpass" class="text-black">Confirm Password</label>
+                    <input type="password" class="form-control" id="password" name="cnfpass">
+                  </div>
+                </div>
+
+            
+                <div class="form-group row">
+                  <div class="col-lg-12">
+                    <input type="submit" class="btn btn-primary btn-lg btn-block" value="Change Password">
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          
+        </div>
       </div>
     </div>
-    
- 
+
     <div class="site-section bg-light">
       <div class="container">
         <div class="row">
@@ -176,8 +209,8 @@
       
     </div>
 
-   <!-- footer start -->
-   <footer class="site-footer bg-light">
+ <!-- footer start -->
+ <footer class="site-footer bg-light">
       <div class="container">
         <div class="row">
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
@@ -215,7 +248,7 @@
         <div class="row pt-5 mt-5 text-center">
           <div class="col-md-12">
             <p>
-              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+              
               Copyright &copy;
               <script>document.write(new Date().getFullYear());</script> All rights reserved
               with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank"
@@ -244,7 +277,3 @@
 </body>
 
 </html>
-
-
-
-

@@ -47,47 +47,56 @@
         <div class="d-flex align-items-center justify-content-between">
           <div class="logo">
             <div class="site-logo">
-              <a href="{{url('/home')}}" class="js-logo-clone"><strong class="text-primary">Medi</strong>Mart</a>
+              <a href="{{url('/patHome')}}" class="js-logo-clone"><strong class="text-primary">Medi</strong>Mart</a>
             </div>
           </div>
           <div class="main-nav d-none d-lg-block">
             <nav class="site-navigation text-right text-md-center" role="navigation">
               <ul class="site-menu js-clone-nav d-none d-lg-block">
-                <li><a href="{{url('/home')}}">Home</a></li>
-                <li><a href="{{url('/shop')}}">Store</a></li>
+                <li><a href="{{url('/patHome')}}">Home</a></li>
+                <li><a href="{{url('/patMedView')}}">Store</a></li>
                 <li class="has-children">
                   <a>Products</a>
                   <ul class="dropdown">
-                    <li><a href="{{url('/shop')}}">Supplements</a></li>
+                    <li><a class="bg-dark text-light" href="{{url('/patMedView')}}" >Supplements</a></li>
                     
-                    <li><a href="{{url('/shop')}}">Vitamins</a></li>
+                    <li><a href="{{url('/patMedVit')}}">Vitamins</a></li>
                       
-                    <li><a href="{{url('/shop')}}">Minerals</a></li>
-                    <li><a href="{{url('/shop')}}">Herbals</a></li>
-                    <li><a href="{{url('/shop')}}">Protein and Fitness</a></li>
-                    <li><a href="{{url('/shop')}}">Probiotics and Digestive</a></li>
-                    <li><a href="{{url('/shop')}}">Imune System</a></li>
+                    
+                    <li><a href="{{url('/patMedMin')}}">Minerals</a></li>
+                    <li><a href="{{url('/patMedHer')}}">Herbal</a></li>
+                    <li><a href="{{url('/patMedPro')}}">Protein and Fitness</a></li>
+                    <li><a href="{{url('/patMedProbio')}}">Probiotics and Digestive</a></li>
+                    <li><a href="{{url('/patMedImu')}}">Imune System</a></li>
                     
                   </ul>
                 </li>
-                <li class="active"><a href="{{url('/about')}}">About</a></li>
-                <li><a href="{{url('/loginView')}}">Contact</a></li>
+                <li class="active"><a href="{{url('/patAbout')}}">About</a></li>
+                <li><a href="{{url('/contact')}}">Contact</a></li>
+                <li><a href="{{url('/order')}}">Order</a></li>
               </ul>
             </nav>
           </div>
           <div class="icons">
             <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
-            <a href="{{url('/loginView')}}" class="icons-btn d-inline-block bag">
+            <a href="{{url('/cart')}}" class="icons-btn d-inline-block bag">
               <span class="icon-shopping-bag"></span>
             </a>
-            <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span
-                class="icon-menu"></span></a>
-            <a class="btn btn-sm btn-outline-primary" href="{{url('/loginView')}}">login</a>
-            <a class="btn btn-sm btn-outline-primary" href="{{url('/registerView')}}">Registration </a>
+            
           </div>
+          <div class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                Patient
+                </button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="">My account</a>
+                <a class="dropdown-item" href="/logout">Log out</a>
+              </div>
+            </div>
         </div>
       </div>
     </div>
+
 
     <!-- nav bar close -->
   
@@ -97,10 +106,10 @@
         <div class="row">
           <div class="col-lg-12 mx-auto align-self-center">
             <div class="site-block-cover-content text-center">
-              <h1 class="mb-0">About <strong class="text-primary">MediMart</strong></h1>
+              <h1 class="mb-0">About <strong class="text-primary">Medimart</strong></h1>
               <div class="row justify-content-center mb-5">
                 <div class="col-lg-6 text-center">
-                  <p>Medimart was created with a vision to serve people with a smile, to provide quality service over a virgin sector and become the industry leader in E-commerce healthcare.</p>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis ex perspiciatis non quibusdam vel quidem.</p>
                 </div>
               </div>
               <p><a href="#" class="btn btn-primary px-5 py-3">Shop Now</a></p>
@@ -116,17 +125,17 @@
         <div class="row">
           <div class="col-lg-4">
             <h3 class="text-black h4">Why Us</h3>
-            <p>Medimart was created with a vision to serve people with a smile, to provide quality service over a virgin sector.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem assumenda, delectus. Amet repellendus quidem, fugiat.</p>
             
           </div>
           <div class="col-lg-4">
             <h3 class="text-black h4">History</h3>
-            <p>Medimart was created with a vision to serve people with a smile, to provide quality service over a virgin sector.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda iste aut, ut similique nobis ab?</p>
             
           </div>
           <div class="col-lg-4">
             <h3 class="text-black h4">Awards</h3>
-            <p>Medimart was created with a vision to serve people with a smile, to provide quality service over a virgin sector.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae nisi magni in fugit, ad laudantium.</p>
             
           </div>
         </div>
@@ -154,7 +163,8 @@
                   <p class="block-38-subheading">CEO/Co-Founder</p>
                 </div>
                 <div class="block-38-body">
-                  <p>Medimart was created with a vision to serve people with a smile, to provide quality service over a virgin sector and become the industry leader in E-commerce healthcare.</p>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae aut minima nihil sit distinctio
+                    recusandae doloribus ut fugit officia voluptate soluta. </p>
                 </div>
               </div>
             </div>
@@ -168,7 +178,8 @@
                   <p class="block-38-subheading">Co-Founder</p>
                 </div>
                 <div class="block-38-body">
-                  <p>Medimart was created with a vision to serve people with a smile, to provide quality service over a virgin sector and become the industry leader in E-commerce healthcare.</p>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae aut minima nihil sit distinctio
+                    recusandae doloribus ut fugit officia voluptate soluta. </p>
                 </div>
               </div>
             </div>
@@ -182,7 +193,8 @@
                   <p class="block-38-subheading">Marketing</p>
                 </div>
                 <div class="block-38-body">
-                  <p>Medimart was created with a vision to serve people with a smile, to provide quality service over a virgin sector and become the industry leader in E-commerce healthcare.</p>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae aut minima nihil sit distinctio
+                    recusandae doloribus ut fugit officia voluptate soluta. </p>
                 </div>
               </div>
             </div>
@@ -196,7 +208,8 @@
                   <p class="block-38-subheading">Sales Manager</p>
                 </div>
                 <div class="block-38-body">
-                  <p>Medimart was created with a vision to serve people with a smile, to provide quality service over a virgin sector and become the industry leader in E-commerce healthcare.</p>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae aut minima nihil sit distinctio
+                    recusandae doloribus ut fugit officia voluptate soluta. </p>
                 </div>
               </div>
             </div>
@@ -212,7 +225,8 @@
                   <p class="block-38-subheading">CEO/Co-Founder</p>
                 </div>
                 <div class="block-38-body">
-                  <p>Medimart was created with a vision to serve people with a smile, to provide quality service over a virgin sector and become the industry leader in E-commerce healthcare.</p>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae aut minima nihil sit distinctio
+                    recusandae doloribus ut fugit officia voluptate soluta. </p>
                 </div>
               </div>
             </div>
@@ -226,23 +240,12 @@
                   <p class="block-38-subheading">Co-Founder</p>
                 </div>
                 <div class="block-38-body">
-                  <p>Medimart was created with a vision to serve people with a smile, to provide quality service over a virgin sector and become the industry leader in E-commerce healthcare.</p>
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae aut minima nihil sit distinctio
+                    recusandae doloribus ut fugit officia voluptate soluta. </p>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="site-section bg-image overlay" style="background-image: url('images/hero_bg_2.jpg');">
-      <div class="container">
-        <div class="row justify-content-center text-center">
-         <div class="col-lg-7">
-           <h3 class="text-white">Sign up for discount up to 55% OFF</h3>
-           <p class="text-white">Medimart was created with a vision to serve people with a smile.</p>
-           <p class="mb-0"><a href="{{url('/loginView')}}" class="btn btn-outline-white">Sign up</a></p>
-         </div>
         </div>
       </div>
     </div>
@@ -256,7 +259,8 @@
             </div>
             <div class="text">
               <h2>Free Shipping</h2>
-              <p>Medimart was created with a vision to serve people with a smile, to provide quality service over a virgin sector and become the industry leader in E-commerce healthcare.</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at iaculis quam. Integer accumsan
+                tincidunt fringilla.</p>
             </div>
           </div>
           <div class="col-md-6 col-lg-4 d-lg-flex mb-4 mb-lg-0 pl-4" data-aos="fade-up" data-aos-delay="100">
@@ -265,7 +269,8 @@
             </div>
             <div class="text">
               <h2>Free Returns</h2>
-              <p>Medimart was created with a vision to serve people with a smile, to provide quality service over a virgin sector and become the industry leader in E-commerce healthcare.</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at iaculis quam. Integer accumsan
+                tincidunt fringilla.</p>
             </div>
           </div>
           <div class="col-md-6 col-lg-4 d-lg-flex mb-4 mb-lg-0 pl-4" data-aos="fade-up" data-aos-delay="200">
@@ -274,15 +279,16 @@
             </div>
             <div class="text">
               <h2>Customer Support</h2>
-              <p>Medimart was created with a vision to serve people with a smile, to provide quality service over a virgin sector and become the industry leader in E-commerce healthcare.</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at iaculis quam. Integer accumsan
+                tincidunt fringilla.</p>
             </div>
           </div>
         </div>
       </div>
     </div>
 
- <!-- footer start -->
- <footer class="site-footer bg-light">
+    <!-- footer start -->
+    <footer class="site-footer bg-light">
       <div class="container">
         <div class="row">
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
@@ -297,9 +303,9 @@
           <div class="col-lg-3 mx-auto mb-5 mb-lg-0">
             <h3 class="footer-heading mb-4">Navigation</h3>
             <ul class="list-unstyled">
-              <li><a href="{{url('/shop')}}">Supplements</a></li>
-              <li><a href="{{url('/shop')}}">Vitamins</a></li>
-              <li><a href="{{url('/shop')}}">Minerals</a></li>
+              <li><a href="{{url('/patMedView')}}">Supplements</a></li>
+              <li><a href="{{url('/patMedVit')}}">Vitamins</a></li>
+              <li><a href="{{url('/adminSupMin')}}">Minerals</a></li>
               <li><a href="#">Herbals</a></li>
             </ul>
           </div>
@@ -314,13 +320,12 @@
               </ul>
             </div>
 
-
           </div>
         </div>
         <div class="row pt-5 mt-5 text-center">
           <div class="col-md-12">
             <p>
-              
+            
               Copyright &copy;
               <script>document.write(new Date().getFullYear());</script> All rights reserved
               with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank"

@@ -47,65 +47,58 @@
         <div class="d-flex align-items-center justify-content-between">
           <div class="logo">
             <div class="site-logo">
-              <a href="{{url('/adminHome')}}" class="js-logo-clone"><strong class="text-primary">Medi</strong>Mart</a>
+              <a href="{{url('/patHome')}}" class="js-logo-clone"><strong class="text-primary">Medi</strong>Mart</a>
             </div>
           </div>
           <div class="main-nav d-none d-lg-block">
             <nav class="site-navigation text-right text-md-center" role="navigation">
               <ul class="site-menu js-clone-nav d-none d-lg-block">
-                <li><a href="{{url('/adminHome')}}">Home</a></li>
-                
+                <li><a href="{{url('/patHome')}}">Home</a></li>
+                <li><a href="{{url('/patMedView')}}">Store</a></li>
                 <li class="has-children">
                   <a>Products</a>
                   <ul class="dropdown">
-                    <li><a class="bg-dark text-light" href="{{url('/adminSup')}}" >Supplements</a></li>
+                    <li><a class="bg-dark text-light" href="{{url('/patMedView')}}" >Supplements</a></li>
                     
-                    <li><a href="{{url('/adminSupVit')}}">Vitamins</a></li>
+                    <li><a href="{{url('/patMedVit')}}">Vitamins</a></li>
                       
                     
-                    <li><a href="{{url('/adminSupMin')}}">Minerals</a></li>
-                    <li><a href="{{url('/adminSupHer')}}">Herbal</a></li>
-                    <li><a href="{{url('/adminSupPro')}}">Protein and Fitness</a></li>
-                    <li><a href="{{url('/adminSupProbio')}}">Probiotics and Digestive</a></li>
-                    <li><a href="{{url('/adminSupImu')}}">Imune System</a></li>
-            
+                    <li><a href="{{url('/patMedMin')}}">Minerals</a></li>
+                    <li><a href="{{url('/patMedHer')}}">Herbal</a></li>
+                    <li><a href="{{url('/patMedPro')}}">Protein and Fitness</a></li>
+                    <li><a href="{{url('/patMedProbio')}}">Probiotics and Digestive</a></li>
+                    <li><a href="{{url('/patMedImu')}}">Imune System</a></li>
+                    
                   </ul>
                 </li>
-                <li><a href="{{url('/adminAbout')}}">About</a></li>
-                <li class="active"><a href="{{url('/adminMsg')}}">Message</a></li>
-                <li><a href="{{url('/userInfo')}}">User Details</a></li>
-                <li class="has-children">
-                  <a>Orders</a>
-                  <ul class="dropdown">
-                    <li><a href="{{url('/orderPending')}}">Pending</a></li>
-                    <li><a href="{{url('/orderApprove')}}">Approved</a></li>
-                    <li><a href="{{url('/orderDeliver')}}">Delivered</a></li>
-            
-                  </ul>
+                <li><a href="{{url('/patAbout')}}">About</a></li>
+                <li><a href="{{url('/contact')}}">Contact</a></li>
+                <li><a href="{{url('/order')}}">Order</a></li>
               </ul>
             </nav>
           </div>
-         
           <div class="icons">
             <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
+            <a href="{{url('/cart')}}" class="icons-btn d-inline-block bag">
+              <span class="icon-shopping-bag"></span>
+            </a>
             
-            </div>
-            <div class="dropdown">
-              <button class="btn btn-sm btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-                Admin
+          </div>
+          <div class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                Patient
                 </button>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="{{url('/adminAccount')}}">My account</a>
+                <a class="dropdown-item" href="">My account</a>
                 <a class="dropdown-item" href="{{url('/logout')}}">Log out</a>
               </div>
             </div>
-         
         </div>
       </div>
     </div>
 
+
     <!-- nav bar close -->
-  
   
 
     <div class="bg-light py-3">
@@ -113,40 +106,72 @@
       
         <div class="row">
           <div class="col-md-12 mb-0">
-            <a href="{{url('/adminHome')}}">Home</a> <span class="mx-2 mb-0">/</span>
-            <strong class="text-black">User Details</strong>
+            <a href="{{url('/patHome')}}">Home</a> <span class="mx-2 mb-0">/</span>
+            <strong class="text-black">Change Password</strong>
           </div>
         </div>
       </div>
     </div>
-    
-   
- 
- 
-    <div class="site-section bg-light">
-      <div class="container">
-      
-<!-- main section start -->
- @if(isset($mesInfo))
-<div class="row text-dark">
-@foreach($mesInfo->all() as $msg)
-<div class="shadow card border-light mb-3" style="max-width: 18rem; margin-left: 2%; margin-top: 1%;">
-  <div class="card-header font-weight-bold">{{$msg->fname}} {{$msg->lname}}</div>
-  <div class="card-body">
-    <h5 class="card-title">Reason: {{$msg->subject}}</h5>
-    <p class="card-text">{{$msg->message}}</p>
-    <a href="" class="btn btn-sm btn-outline-primary">Reply</a>
-  </div>
+    @if(session('message'))
+        <div class="alert alert-warning">
+            {{session('message')}}
+        </div>
+        @endif
 
-</div>
-@endforeach
-<div>
-@endif
-<!-- main section end -->
+
+    <div class="site-section">
+      <div class="container">
+      @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $er)
+                <li>{{$er}}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+        <div class="row">
+          <div class="col-md-12">
+            <h2 class="h3 mb-5 text-black">Login:</h2>
+          </div>
+          <div class="col-md-12">
+
+    
+            <form action="{{url('/patChnPassSub')}}" method="post">
+                @csrf
+              <div class="p-3 p-lg-5 border">
+                
+                <div class="form-group row">
+                  <div class="col-md-12">
+                    <label for="oldpass" class="text-black">Old Password <span class="text-danger">*</span></label>
+                    <input type="password" class="form-control" id="password" name="oldpass" placeholder="">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-12">
+                    <label for="newpass" class="text-black">New Password</label>
+                    <input type="password" class="form-control" id="password" name="newpass">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-md-12">
+                    <label for="cnfpass" class="text-black">Confirm Password</label>
+                    <input type="password" class="form-control" id="password" name="cnfpass">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <div class="col-lg-12">
+                    <input type="submit" class="btn btn-primary btn-lg btn-block" value="Change Password">
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          
+        </div>
       </div>
     </div>
-    
- 
+
     <div class="site-section bg-light">
       <div class="container">
         <div class="row">
@@ -176,8 +201,8 @@
       
     </div>
 
-   <!-- footer start -->
-   <footer class="site-footer bg-light">
+     <!-- footer start -->
+     <footer class="site-footer bg-light">
       <div class="container">
         <div class="row">
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
@@ -192,8 +217,8 @@
           <div class="col-lg-3 mx-auto mb-5 mb-lg-0">
             <h3 class="footer-heading mb-4">Navigation</h3>
             <ul class="list-unstyled">
-              <li><a href="{{url('/adminSup')}}">Supplements</a></li>
-              <li><a href="{{url('/adminSupVit')}}">Vitamins</a></li>
+              <li><a href="{{url('/patMedView')}}">Supplements</a></li>
+              <li><a href="{{url('/patMedVit')}}">Vitamins</a></li>
               <li><a href="{{url('/adminSupMin')}}">Minerals</a></li>
               <li><a href="#">Herbals</a></li>
             </ul>
@@ -215,7 +240,7 @@
         <div class="row pt-5 mt-5 text-center">
           <div class="col-md-12">
             <p>
-              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+              
               Copyright &copy;
               <script>document.write(new Date().getFullYear());</script> All rights reserved
               with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank"
@@ -242,9 +267,3 @@
   <script src="js/main.js"></script>
 
 </body>
-
-</html>
-
-
-
-

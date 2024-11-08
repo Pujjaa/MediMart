@@ -10,24 +10,53 @@ use Illuminate\View\View;
 
 class MedicineController extends Controller
 {
+
+    //supplements page view
     public function supView(){
         return view('admin_sup');
     }
 
+    //vitamin page view
     public function vitView(){
-        $allVit=DB::Table('medicines')->where('category','=','Vitamins')->get();
+        $allVit=DB::table('medicines')->where('category','=','Vitamins')->get();
         return view('admin_sup_vit')->with('allVitamin', $allVit);
     }
 
+    //minerals page view
     public function minView(){
-        $allMin=DB::Table('medicines')->where('category','=','Minerals')->get();
+        $allMin=DB::table('medicines')->where('category','=','Minerals')->get();
         return view('admin_sup_mineral')->with('allMineral', $allMin);
     }
 
+    //herbal page view
+    public function herView(){
+        $allHer=DB::table('medicines')->where('category','=','Herbals')->get();
+        return view('admin_sup_herbal')->with('all', $allHer);
+    }
+
+    //protein page view
+    public function proView(){
+        $allPro=DB::table('medicines')->where('category','=','Proteins')->get();
+        return view('admin_sup_protein')->with('all', $allPro);
+    }
+
+    //probiotic page view
+    public function probioView(){
+        $allPro=DB::table('medicines')->where('category','=','Probiotics')->get();
+        return view('admin_sup_probiotic')->with('all', $allPro);
+    }
+    //probiotic page view
+    public function imuView(){
+        $allImu=DB::table('medicines')->where('category','=','Imune')->get();
+        return view('admin_sup_imune')->with('all', $allImu);
+    }
+
+    //add medicines form view
     public function addProView(){
         return view('addProducts');
     }
 
+    //add medicines
     public function addProSub(Request $req){
         $req->validate(
             [
@@ -61,99 +90,74 @@ class MedicineController extends Controller
         return redirect('/addProduct')->with('message','Added successful..');
     }
 
-    // public function index(){
-    //     $companies=DB::table('companies')->get();
-    //     return view('admin.addmedicine',compact('companies'));
-    // }
 
+    //delete medicines
+    public function medDelete($id,$cat){
+    $delData=DB::table('medicines')->where('id','=',$id)->orWhere('category','=',$cat)->delete();
 
-    // public function medicinelist(){
-    //     $medicines=DB::table('medicines')->get();
-    //     return view('admin.medicinelist',compact('medicines'));
-    // }
+        if($delData){
+            if($cat=='Vitamins'){
+                return redirect('/adminSupVit')->with('message','Deleted...');
+            }elseif($cat=='Minerals'){
+                return redirect('/adminSupMin')->with('message','Deleted...');
+            }elseif($cat=='Herbals'){
+                return redirect('/adminSupHer')->with('message','Deleted...');
+            }elseif($cat=='Proteins'){
+                return redirect('/adminSupPro')->with('message','Deleted...');
+            }elseif($cat=='Probiotics'){
+                return redirect('/adminSupProbio')->with('message','Deleted...');
+            }else{
+                return redirect('/adminSupImu')->with('message','Deleted...');
+            }
+        }else{
+            return redirect('/adminSup');
+        }
+    }
 
-    // public function store(Request $request){
-    //     $val=$request->validate([
-    //        'name'=>'required|string|max:191',
-    //         'company'=>'required|not_in:0|exists:companies,id',
-    //        'price'=>'required|integer',
-    //         'image'=>'required|image|mimes:jpg,jpeg,png,gif',
-    //         'description'=>'required|string|'
-    //     ]);
-    //     //dd($request);
-    //     if ($val->fails()){
-    //         return redirect()->back()->withErrors($val)->withInput();
-    //     }
-    //     //dd($request);
-    //     if($request->file('image'))
-    //     $file= $request->file('image');
-    //     $fileName= time().$file->getClientOriginalName();
-    //     $uploadLocation= "./uploads";
-    //     $file->move($uploadLocation,$fileName);
+    //edit product view
+    public function editProView($id,$cat){
+        $editData=DB::table('medicines')->where('id','=',$id)
+                                        ->orWhere('category','=',$cat)
+                                        ->get();
+        return view('editProducts')->with(['editMed'=>$editData[0]]);
+    }
 
-    //     DB::table('medicines')->insert([
-    //         'name' => $request->input('name'),
-    //         'company' => $request->input('company'),
-    //         'price' => $request->input('price'),
-    //         'image'=>$uploadLocation."/".$fileName,
-    //         'description'=>$request->input('description')
-    //     ]);
-    //         return redirect()->back()->with('success','Successfully Added New Medicine');
-    // }
+    //edit medicines 
+    public function editProSub(Request $req){
+        $req->validate(
+            [
+                'name'=>"required",
+                'image'=>"required",
+                'price' =>"required",
+                'description' =>"required"
+        
+            ]);
+            $id=$req->input('eid');
+            $cat=$req->input('cat');
+            $name= $req->input('name');
+            $image=$req->input('image');
+            $price=$req->input('price');
+            $desc=$req->input('description');
 
-    // public function destroy($id){
-    //     $mid=$id;
-    //     $medicine = DB::table('medicines')->where('id', $mid)->first();
+            if($req->file('image'))
+            $file= $req->file('image');
+            $fileName= time().$file->getClientOriginalName();
+            $uploadLocation= "./uploads";
+            $file->move($uploadLocation,$fileName);
 
-    //     if ($medicine) {
-    //         DB::table('medicines')->where('id', $mid)->delete();
-    //         return redirect()->back()->with('success', 'Successfully Deleted the Medicine');
-    //     }
+            $editData=[
+                'name'=>$name,
+                'image'=>$uploadLocation."/".$fileName,
+                'price'=>$price,
+                'description'=>$desc
+            ]; 
+            $submit=DB::table('medicines')->where('id','=',$id)
+                                          ->orWhere('category','=',$cat)
+                                          ->update($editData);
+    
+        // return redirect('/addProduct')->with('message','Added successful..');
+    }
+    
+    
 
-    //     return redirect()->back()->with('error', 'Medicine not found');
-
-    // }
-
-
-    // public function edit($id){
-
-    //     $medicine = DB::table('medicines')->where('id', $id)->first();
-    //     $companies = DB::table('companies')->get();
-
-    //     if ($medicine) {
-    //         return view('admin.editmedicine', compact('medicine', 'companies'));
-    //     }
-    //     return redirect()->back()->with('error', 'Medicine not found');
-
-    // }
-
-    // public function update(Request $request){
-    //     $val=$request->validate([
-    //         'name'=>'required|string|max:191',
-    //         'company'=>'required|not_in:0|exists:companies,id',
-    //         'price'=>'required|integer',
-    //         'image'=>'required|image|mimes:jpg,jpeg,png,gif',
-    //         'description'=>'required|string|'
-    //     ]);
-
-    //     if ($val->fails()){
-    //         return redirect()->back()->withErrors($val)->withInput();
-    //     }
-    //     //dd($request);
-    //     $eid=$request->input('medicine_id');
-    //     if($request->file('image'))
-    //     $file= $request->file('image');
-    //     $fileName= time().$file->getClientOriginalName();
-    //     $uploadLocation= "./uploads";
-    //     $file->move($uploadLocation,$fileName);
-
-    //     DB::table('medicines')->where('id','=',$eid)->update([
-    //         'name' => $request->input('name'),
-    //         'company' => $request->input('company'),
-    //         'price' => $request->input('price'),
-    //         'image'=>$uploadLocation."/".$fileName,
-    //         'description'=>$request->input('description')
-    //     ]);
-    //     return redirect()->back()->with('success','Successfully Updated Medicine');
-    // }
 }

@@ -53,7 +53,7 @@
           <div class="main-nav d-none d-lg-block">
             <nav class="site-navigation text-right text-md-center" role="navigation">
               <ul class="site-menu js-clone-nav d-none d-lg-block">
-                <li class="active"><a href="{{url('/patHome')}}">Home</a></li>
+                <li><a href="{{url('/patHome')}}">Home</a></li>
                 <li><a href="{{url('/patMedView')}}">Store</a></li>
                 <li class="has-children">
                   <a>Products</a>
@@ -90,7 +90,7 @@
                 </button>
               <div class="dropdown-menu">
                 <a class="dropdown-item" href="">My account</a>
-                <a class="dropdown-item" href="/logout">Log out</a>
+                <a class="dropdown-item" href="{{url('/logout')}}">Log out</a>
               </div>
             </div>
         </div>
@@ -99,33 +99,119 @@
 
 
     <!-- nav bar close -->
-  
 
     <div class="bg-light py-3">
       <div class="container">
+      
         <div class="row">
-          <div class="col-md-12 mb-0"><a href="{{url('/patHome')}}">Home</a> <span class="mx-2 mb-0">/</span> <strong
-              class="text-black">Thank You</strong></div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="site-section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 text-center">
-            <span class="icon-check_circle display-3 text-primary"></span>
-            <h2 class="display-3 text-black">Thank you!</h2>
-            <p class="lead mb-5">Your order was successfuly completed.</p>
-            <p><a href="{{url('/patMedView')}}" class="btn btn-md height-auto px-4 py-3 btn-primary">Back to store</a></p>
+          <div class="col-md-12 mb-0">
+            <a href="{{url('/patHome')}}">Home</a> <span class="mx-2 mb-0">/</span>
+            <strong class="text-black">Accounts</strong>
           </div>
         </div>
       </div>
     </div>
+    @if(isset($info))
+    <div class="site-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h2 class="h3 mb-5 text-black">User Account:</h2>
+          </div>
+          <div class="col-md-12">
+          @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $er)
+                <li>{{$er}}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
 
-  
-     <!-- footer start -->
-     <footer class="site-footer bg-light">
+          <form action="{{url('/patEditSub')}}" method="post" enctype="multipart/form-data">
+            @csrf
+                <div class="form-group row">
+                    <label class="form-label" for="form3Example1m">Name</label>
+                      <input type="text" name="name" id="form3Example1m" class="form-control form-control-lg" value="{{$info->name}}"/>
+                </div>
+
+                <div class="form-group row">
+                    <label class="form-label" for="form3Example97">Email ID</label>
+                    <input type="email" name="email" id="form3Example97" class="form-control form-control-lg" value="{{$info->email}}"/>
+                    
+                  </div>
+
+                  <div class="form-group row">
+                  <label class="form-label" for="form3Example97">Phone</label>
+                    <input type="number" name="phone" id="form3Example97" class="form-control form-control-lg" value="{{$info->phone}}"/>
+                  </div>
+
+                  <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
+                    <h6 class="mb-0 me-4">Gender: </h6>
+
+                    <div class="form-check form-check-inline mb-0 me-4">
+                    <label class="form-check-label" for="femaleGender">Female</label>
+                      <input class="form-check-input" type="radio" name="gender" value="Female" id="femaleGender" @if($info->gender=='Female') checked @endif/>
+                    </div>
+                    <div class="form-check form-check-inline mb-0 me-4">
+                    <label class="form-check-label" for="maleGender">Male</label>
+                      <input class="form-check-input" type="radio" name="gender" value="Male" id="maleGender"@if($info->gender=='Male') checked @endif/>
+                    </div>
+                  </div>
+
+                <div class="form-group row">
+                <label class="form-label" for="form3Example8">Address</label>
+                  <input type="text" id="form3Example8" name="address" class="form-control form-control-lg" value="{{$info->address}}"/>
+                  
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 mb-4">
+                  <label class="form-label" for="form3Example8">State</label>
+                    <select data-mdb-select-init name="state">
+                      <option value="" @if($info->state=='') selected @endif >State</option>
+                      <option value="West Bengal" @if($info->state=='West Bengal') selected @endif >West Bengal</option>
+                      <option value="Bihar" @if($info->state=='Bihar') selected @endif >Bihar</option>
+                      <option value="Jharkhand" @if($info->state=='Jharkhand') selected @endif >Jharkhand</option>
+                      <option value="Karnataka" @if($info->state=='Karnataka') selected @endif >Karnataka</option>
+                      <option value="Uttar Pradesh" @if($info->state=='Uttar Pradesh') selected @endif >Uttar Pradesh</option>
+                    </select>
+
+                  </div>
+                  <div class="col-md-6 mb-4">
+                  <label class="form-label" for="form3Example8">City</label>
+                    <select data-mdb-select-init name="city">
+                      <option value="" @if($info->city=='') selected @endif >City</option>
+                      <option value="Kolkata" @if($info->city=='Kolkata') selected @endif>Kolkata</option>
+                      <option value="Howrah" @if($info->city=='Howrah') selected @endif>Howrah</option>
+                      <option value="Durgapur" @if($info->city=='Durgapur') selected @endif >Durgapur</option>
+                      <option value="Purulia" @if($info->city=='Purulia') selected @endif >Purulia</option>
+                    </select>
+
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                <label class="form-label" for="form3Example90" >Pincode</label>
+                  <input type="number" id="form3Example90" name="pincode" class="form-control form-control-lg" value="{{$info->pincode}}"/>
+                  
+                </div>
+
+                <div class="form-group">
+                  <button  type="reset" class="btn btn-outline-danger">Reset all</button>
+                
+          <button type="submit" class="btn btn-outline-primary">Submit form</button>
+       
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    @endif
+
+      <!-- footer start -->
+      <footer class="site-footer bg-light">
       <div class="container">
         <div class="row">
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
@@ -143,7 +229,7 @@
               <li><a href="{{url('/patMedView')}}">Supplements</a></li>
               <li><a href="{{url('/patMedVit')}}">Vitamins</a></li>
               <li><a href="{{url('/adminSupMin')}}">Minerals</a></li>
-              <li><a href="{{url('/adminSupHer')}}">Herbals</a></li>
+              <li><a href="#">Herbals</a></li>
             </ul>
           </div>
 

@@ -1,38 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
 
-
-class DashboardController extends Controller
+class PatientAccController extends Controller
 {
-    public function adminHome(){
-        return view('adminhome');
-    }
-
-    public function adminAbout(){
-        return view('adminAbout');
-    }
-
-    public function adminMessage(){
-        $allMes=DB::table('messages')->get();
-        return view('admin_message')->with(['mesInfo'=>$allMes]);
-    } 
-
     public function accountInfo(){
-        $adminData=DB::table('users')->where('role','=','Admin')->first();
-        return view('adminaccount')->with(['adminInfo'=>$adminData]);
+        $userId= session()->get('session_id');
+        $patData=DB::table('users')->where('id','=',$userId)->get();
+        return view('PatAccount')->with(['info'=>$patData[0]]);
     }
-    public function adminEditView($ed){
-        $adminData=DB::table('users')->where('id','=',$ed)->first();
-        return view('adminEdit')->with(['adminInfo'=>$adminData]);
+    public function patEditView(){
+        $userId= session()->get('session_id');
+        $patData=DB::table('users')->where('id','=',$userId)->first();
+        return view('patEdit')->with(['info'=>$patData]);
     }
-    public function adminEdit(Request $req){
-        $eid=$req->input('eid');
+    public function patEdit(Request $req){
+        $userId= session()->get('session_id');
         $req->validate(
             [
                 'name'=>"required|regex:/^[a-zA-Z ]{3,30}$/",
@@ -48,19 +35,19 @@ class DashboardController extends Controller
             'address'=>$req->input('address'),
             'city'=>$req->input('city'),
             'state'=>$req->input('state'),
-            'pincode'=>$req->input('pincode'),
+            'pincode'=>$req->input('pincode')
         ]; 
-        $update = DB::table('users')->where('id','=',$eid)->update($editData);
-        
+
+        $update=DB::table('users')->where('id','=',$userId)->update($editData);
         if($update){
-            return redirect('/adminAccount')->with('message','Profile Updated!!');
+            return redirect('/patAccount')->with('message','Profile Updated!!');
         }else{
-            return redirect('/adminAccount')->with('message','Profile not Updated!!');
+            return redirect('/patAccount')->with('message','Profile not Updated!!');
         }
     }
 
     public function chnPass(){
-        return view('adminChnPass');
+        return view('PatChnPass');
     }
 
     public function chnPassSub(Request $req){
@@ -81,14 +68,13 @@ class DashboardController extends Controller
         if($oldpass==$dbpass){
             if($oldpass!=$newpass){
                     DB::table('users')->where('id','=',$chnpId)->update(['password'=>$cnfpass]);
-                    return redirect('/adminAccount')->with('message','Password changed');
+                    return redirect('/patAccount')->with('message','Password changed');
                 }else{
-                return redirect('/chnPass')->with('message','Old password and new password are same');
+                return redirect('/patChnPass')->with('message','Old password and new password are same');
                 }
             }else{
-            return redirect('/chnPass')->with('message','Old password is not correct');
+            return redirect('/patChnPass')->with('message','Old password is not correct');
          }
     }
-
     
 }

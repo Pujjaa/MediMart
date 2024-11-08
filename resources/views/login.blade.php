@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="fonts/icomoon/style.css">
 
   <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -61,14 +62,16 @@
                     
                     <li><a href="{{url('/shop')}}">Vitamins</a></li>
                       
-                    
-                    <li><a href="{{url('/shop')}}">Diet &amp; Nutrition</a></li>
-                    <li><a href="{{url('/shop')}}">Tea &amp; Coffee</a></li>
+                    <li><a href="{{url('/shop')}}">Minerals</a></li>
+                    <li><a href="{{url('/shop')}}">Herbals</a></li>
+                    <li><a href="{{url('/shop')}}">Protein and Fitness</a></li>
+                    <li><a href="{{url('/shop')}}">Probiotics and Digestive</a></li>
+                    <li><a href="{{url('/shop')}}">Imune System</a></li>
                     
                   </ul>
                 </li>
                 <li><a href="{{url('/about')}}">About</a></li>
-                <li><a href="{{url('/contact')}}">Contact</a></li>
+                <li><a href="{{url('/loginView')}}">Contact</a></li>
               </ul>
             </nav>
           </div>
@@ -80,7 +83,7 @@
             <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span
                 class="icon-menu"></span></a>
             <a class="btn btn-sm btn-outline-primary" href="{{url('/loginView')}}">login</a>
-            <a class="btn btn-sm btn-outline-primary" href="{{url('/loginView')}}">Registration </a>
+            <a class="btn btn-sm btn-outline-primary" href="{{url('/registerView')}}">Registration </a>
           </div>
         </div>
       </div>
@@ -94,7 +97,7 @@
       
         <div class="row">
           <div class="col-md-12 mb-0">
-            <a href="{{url('/')}}">Home</a> <span class="mx-2 mb-0">/</span>
+            <a href="{{url('/home')}}">Home</a> <span class="mx-2 mb-0">/</span>
             <strong class="text-black">Login</strong>
           </div>
         </div>
@@ -175,7 +178,7 @@
     </div>
 
    <!-- footer start -->
-   <footer class="site-footer bg-light">
+ <footer class="site-footer bg-light">
       <div class="container">
         <div class="row">
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
@@ -190,10 +193,10 @@
           <div class="col-lg-3 mx-auto mb-5 mb-lg-0">
             <h3 class="footer-heading mb-4">Navigation</h3>
             <ul class="list-unstyled">
-              <li><a href="#">Supplements</a></li>
-              <li><a href="#">Vitamins</a></li>
-              <li><a href="#">Diet &amp; Nutrition</a></li>
-              <li><a href="#">Tea &amp; Coffee</a></li>
+              <li><a href="{{url('/shop')}}">Supplements</a></li>
+              <li><a href="{{url('/shop')}}">Vitamins</a></li>
+              <li><a href="{{url('/shop')}}">Minerals</a></li>
+              <li><a href="#">Herbals</a></li>
             </ul>
           </div>
 
@@ -213,7 +216,7 @@
         <div class="row pt-5 mt-5 text-center">
           <div class="col-md-12">
             <p>
-              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+              
               Copyright &copy;
               <script>document.write(new Date().getFullYear());</script> All rights reserved
               with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank"

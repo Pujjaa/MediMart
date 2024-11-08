@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="fonts/icomoon/style.css">
 
   <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -46,50 +47,56 @@
         <div class="d-flex align-items-center justify-content-between">
           <div class="logo">
             <div class="site-logo">
-              <a href="{{url('/home')}}" class="js-logo-clone"><strong class="text-primary">Medi</strong>Mart</a>
+              <a href="{{url('/adminHome')}}" class="js-logo-clone"><strong class="text-primary">Medi</strong>Mart</a>
             </div>
           </div>
           <div class="main-nav d-none d-lg-block">
             <nav class="site-navigation text-right text-md-center" role="navigation">
               <ul class="site-menu js-clone-nav d-none d-lg-block">
-                <li><a href="{{url('/adminHome')}}">Home</a></li>
-                <li><a href="{{url('/')}}">Company</a></li>
+                <li class="active"><a href="{{url('/adminHome')}}">Home</a></li>
+                
                 <li class="has-children">
                   <a>Products</a>
                   <ul class="dropdown">
                     <li><a class="bg-dark text-light" href="{{url('/adminSup')}}" >Supplements</a></li>
                     
-                    <li><a href="{{url('/shop')}}">Vitamins</a></li>
+                    <li><a href="{{url('/adminSupVit')}}">Vitamins</a></li>
                       
                     
-                    <li><a href="{{url('/shop')}}">Minerals</a></li>
-                    <li><a href="{{url('/shop')}}">Herbal</a></li>
-                    <li><a href="{{url('/shop')}}">Protein and Fitness</a></li>
-                    <li><a href="{{url('/shop')}}">Probiotics and Digestive</a></li>
-                    <li><a href="{{url('/shop')}}">Imune System</a></li>
-                    
+                    <li><a href="{{url('/adminSupMin')}}">Minerals</a></li>
+                    <li><a href="{{url('/adminSupHer')}}">Herbal</a></li>
+                    <li><a href="{{url('/adminSupPro')}}">Protein and Fitness</a></li>
+                    <li><a href="{{url('/adminSupProbio')}}">Probiotics and Digestive</a></li>
+                    <li><a href="{{url('/adminSupImu')}}">Imune System</a></li>
+            
                   </ul>
                 </li>
-                <li><a href="{{url('/about')}}">About</a></li>
-                <li><a href="{{url('/contact')}}">Message</a></li>
+                <li><a href="{{url('/adminAbout')}}">About</a></li>
+                <li><a href="{{url('/adminMsg')}}">Message</a></li>
                 <li><a href="{{url('/userInfo')}}">User Details</a></li>
-
+                <li class="has-children">
+                  <a>Orders</a>
+                  <ul class="dropdown">
+                    <li><a href="{{url('/orderPending')}}">Pending</a></li>
+                    <li><a href="{{url('/orderApprove')}}">Approved</a></li>
+                    <li><a href="{{url('/orderDeliver')}}">Delivered</a></li>
+            
+                  </ul>
               </ul>
             </nav>
           </div>
+         
           <div class="icons">
             <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
-            <a href="{{url('/loginView')}}" class="icons-btn d-inline-block bag">
-              <span class="icon-shopping-bag"></span>
-            </a>
+            
             </div>
             <div class="dropdown">
               <button class="btn btn-sm btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
                 Admin
                 </button>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="{{url('adminAccount')}}">My account</a>
-                <a class="dropdown-item" href="#">Log out</a>
+                <a class="dropdown-item" href="{{url('/adminAccount')}}">My account</a>
+                <a class="dropdown-item" href="{{url('/logout')}}">Log out</a>
               </div>
             </div>
          
@@ -105,7 +112,7 @@
       
         <div class="row">
           <div class="col-md-12 mb-0">
-            <a href="{{url('/home')}}">Home</a> <span class="mx-2 mb-0">/</span>
+            <a href="{{url('/adminHome')}}">Home</a> <span class="mx-2 mb-0">/</span>
             <strong class="text-black">Add products</strong>
           </div>
         </div>
@@ -114,7 +121,7 @@
     
 <!-- form section start -->
 @if(session('message'))
-        <div class="alert alert-success">
+        <div class="alert alert-warning">
             {{session('message')}}
         </div>
 @endif 
@@ -185,8 +192,8 @@
     <!-- form section end -->
 
 
-       <!-- footer start -->
-       <footer class="site-footer bg-light">
+    <!-- footer start -->
+    <footer class="site-footer bg-light">
       <div class="container">
         <div class="row">
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
@@ -201,10 +208,10 @@
           <div class="col-lg-3 mx-auto mb-5 mb-lg-0">
             <h3 class="footer-heading mb-4">Navigation</h3>
             <ul class="list-unstyled">
-              <li><a href="#">Supplements</a></li>
-              <li><a href="#">Vitamins</a></li>
-              <li><a href="#">Diet &amp; Nutrition</a></li>
-              <li><a href="#">Tea &amp; Coffee</a></li>
+              <li><a href="{{url('/adminSup')}}">Supplements</a></li>
+              <li><a href="{{url('/adminSupVit')}}">Vitamins</a></li>
+              <li><a href="{{url('/adminSupMin')}}">Minerals</a></li>
+              <li><a href="#">Herbals</a></li>
             </ul>
           </div>
 

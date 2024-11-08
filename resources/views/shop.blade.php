@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="fonts/icomoon/style.css">
 
   <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -52,8 +53,8 @@
           <div class="main-nav d-none d-lg-block">
             <nav class="site-navigation text-right text-md-center" role="navigation">
               <ul class="site-menu js-clone-nav d-none d-lg-block">
-                <li class="active"><a href="{{url('/home')}}">Home</a></li>
-                <li><a href="{{url('/shop')}}">Store</a></li>
+                <li><a href="{{url('/home')}}">Home</a></li>
+                <li class="active"><a href="{{url('/shop')}}">Store</a></li>
                 <li class="has-children">
                   <a>Products</a>
                   <ul class="dropdown">
@@ -62,8 +63,11 @@
                     <li><a href="{{url('/shop')}}">Vitamins</a></li>
                       
                     
-                    <li><a href="{{url('/shop')}}">Diet &amp; Nutrition</a></li>
-                    <li><a href="{{url('/shop')}}">Tea &amp; Coffee</a></li>
+                    <li><a href="{{url('/shop')}}">Minerals</a></li>
+                    <li><a href="{{url('/shop')}}">Herbals</a></li>
+                    <li><a href="{{url('/shop')}}">Protein and Fitness</a></li>
+                    <li><a href="{{url('/shop')}}">Probiotics and Digestive</a></li>
+                    <li><a href="{{url('/shop')}}">Imune System</a></li>
                     
                   </ul>
                 </li>
@@ -88,158 +92,180 @@
 
     <!-- nav bar close -->
   
-  
 
-    <div class="bg-light py-3">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 mb-0"><a href="{{url('/home')}}">Home</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Store</strong></div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="py-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6">
-            <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter by Price</h3>
-            <div id="slider-range" class="border-primary"></div>
-            <input type="text" name="text" id="amount" class="form-control border-0 pl-0 bg-white" disabled="" />
-          </div>
-          <div class="col-lg-6 text-lg-right">
-            <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter</h3>
-            <button type="button" class="btn btn-primary btn-md dropdown-toggle px-4" id="dropdownMenuReference"
-              data-toggle="dropdown">Reference</button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuReference">
-              <a class="dropdown-item" href="{{url('/shop')}}">Relevance</a>
-              <a class="dropdown-item" href="{{url('/shop')}}">Name, A to Z</a>
-              <a class="dropdown-item" href="{{url('/shop')}}">Name, Z to A</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{{url('/shop')}}">Price, low to high</a>
-              <a class="dropdown-item" href="{{url('/shop')}}">Price, high to low</a>
+    <div class="owl-carousel owl-single px-0">
+      <div class="site-blocks-cover overlay" style="background-image: url('images/shopImg.jpg');">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 mx-auto align-self-center">
+              <div class="site-block-cover-content text-center">
+                <h1 class="mb-0"><strong class="text-primary">MediMart</strong> Opens 24 Hours</h1>
+
+                <div class="row justify-content-center mb-5">
+                  <div class="col-lg-6 text-center">
+                    <p>Your Online Healthcare Solution</p>
+                   
+                  </div>
+                </div>
+                
+                <p><a href="{{url('/shop')}}" class="btn btn-primary px-5 py-3">Shop Now</a></p>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+      <div class="site-blocks-cover overlay" style="background-image: url('images/shopImg2.jfif');">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 mx-auto align-self-center">
+              <div class="site-block-cover-content text-center">
+                <h1 class="mb-0">New Medicine <strong class="text-primary">Everyday</strong></h1>
+                <div class="row justify-content-center mb-5">
+                  <div class="col-lg-6 text-center">
+                    <p>Country's Largest Medicine Shop</p>
+                  </div>
+                </div>
+                <p><a href="{{url('/shop')}}" class="btn btn-primary px-5 py-3">Shop Now</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
+
+
+    
+    
     <div class="site-section bg-light">
       <div class="container">
         <div class="row">
-          <div class="col-sm-6 col-lg-4 text-center item mb-4 item-v2">
-            <span class="onsale">Sale</span>
-            <img src="images/product_01.png" alt="Image">
-            <h3 class="text-dark"><a href="{{url('/loginView')}}">Bioderma</a></h3>
-            <p class="price"><del>₹95.00</del> &mdash; ₹55.00</p>
-            <a href="{{url('/loginView')}}" class="btn btn-md btn-outline-primary" style="color:green;">Add to cart</a>
-            <a href="{{url('/loginView')}}" class="btn btn-md btn-primary" style="color:white;">Buy Now</a>
-
-          </div>
-          <div class="col-sm-6 col-lg-4 text-center item mb-4 item-v2">
-            <a href="{{url('/loginView')}}"> <img src="images/product_02.png" alt="Image"></a>
-            <h3 class="text-dark"><a href="{{url('/loginView')}}">Chanca Piedra</a></h3>
-            <p class="price">₹70.00</p>
-            <a href="{{url('/loginView')}}" class="btn btn-md btn-outline-primary" style="color:green;">Add to cart</a>
-            <a href="{{url('/loginView')}}" class="btn btn-md btn-primary" style="color:white;">Buy Now</a>
-          </div>
-          <div class="col-sm-6 col-lg-4 text-center item mb-4 item-v2">
-            <a href="{{url('/loginView')}}"> <img src="images/product_03.png" alt="Image"></a>
-            <h3 class="text-dark"><a href="{{url('/loginView')}}">Umcka Cold Care</a></h3>
-            <p class="price">₹120.00</p>
-            <a href="{{url('/loginView')}}" class="btn btn-md btn-outline-primary" style="color:green;">Add to cart</a>
-            <a href="{{url('/loginView')}}" class="btn btn-md btn-primary" style="color:white;">Buy Now</a>
-          </div>
-    
-          <div class="col-sm-6 col-lg-4 text-center item mb-4 item-v2">
-    
-            <a href="{{url('/loginView')}}"> <img src="images/product_04.png" alt="Image"></a>
-            <h3 class="text-dark"><a href="{{url('/loginView')}}">Cetyl Pure</a></h3>
-            <p class="price"><del>₹45.00</del> &mdash; ₹20.00</p>
-            <a href="{{url('/loginView')}}" class="btn btn-md btn-outline-primary" style="color:green;">Add to cart</a>
-            <a href="{{url('/loginView')}}" class="btn btn-md btn-primary" style="color:white;">Buy Now</a>
-          </div>
-          <div class="col-sm-6 col-lg-4 text-center item mb-4 item-v2">
-            <a href="{{url('/loginView')}}"> <img src="images/product_05.png" alt="Image"></a>
-            <h3 class="text-dark"><a href="{{url('/loginView')}}">CLA Core</a></h3>
-            <p class="price">₹38.00</p>
-            <a href="{{url('/loginView')}}" class="btn btn-md btn-outline-primary" style="color:green;">Add to cart</a>
-            <a href="{{url('/loginView')}}" class="btn btn-md btn-primary" style="color:white;">Buy Now</a>
-          </div>
-          <div class="col-sm-6 col-lg-4 text-center item mb-4 item-v2">
-            <span class="onsale">Sale</span>
-            <a href="{{url('/loginView')}}"> <img src="images/product_06.png" alt="Image"></a>
-            <h3 class="text-dark"><a href="{{url('/loginView')}}">Poo Pourri</a></h3>
-            <p class="price"><del>₹89</del> &mdash; ₹38.00</p>
-            <a href="{{url('/loginView')}}" class="btn btn-md btn-outline-primary" style="color:green;">Add to cart</a>
-            <a href="{{url('/loginView')}}" class="btn btn-md btn-primary" style="color:white;">Buy Now</a>
-          </div>
-
-          <div class="col-sm-6 col-lg-4 text-center item mb-4 item-v2">
-            <span class="onsale">Sale</span>
-            <a href="{{url('/loginView')}}"> <img src="images/product_01.png" alt="Image"></a>
-            <h3 class="text-dark"><a href="{{url('/loginView')}}">Bioderma</a></h3>
-            <p class="price"><del>₹95.00</del> &mdash; ₹55.00</p>
-            <a href="{{url('/loginView')}}" class="btn btn-md btn-outline-primary" style="color:green;">Add to cart</a>
-            <a href="{{url('/loginView')}}" class="btn btn-md btn-primary" style="color:white;">Buy Now</a>
-          </div>
-          <div class="col-sm-6 col-lg-4 text-center item mb-4 item-v2">
-            <a href="{{url('/loginView')}}"> <img src="images/product_02.png" alt="Image"></a>
-            <h3 class="text-dark"><a href="{{url('/loginView')}}">Chanca Piedra</a></h3>
-            <p class="price">₹70.00</p>
-            <a href="{{url('/loginView')}}" class="btn btn-md btn-outline-primary" style="color:green;">Add to cart</a>
-            <a href="{{url('/loginView')}}" class="btn btn-md btn-primary" style="color:white;">Buy Now</a>
-          </div>
-          <div class="col-sm-6 col-lg-4 text-center item mb-4 item-v2">
-            <a href="{{url('/loginView')}}"> <img src="images/product_03.png" alt="Image"></a>
-            <h3 class="text-dark"><a href="{{url('/loginView')}}">Umcka Cold Care</a></h3>
-            <p class="price">₹120.00</p>
-            <a href="{{url('/loginView')}}" class="btn btn-md btn-outline-primary" style="color:green;">Add to cart</a>
-            <a href="{{url('/loginView')}}" class="btn btn-md btn-primary" style="color:white;">Buy Now</a>
-          </div>
-          
-          <div class="col-sm-6 col-lg-4 text-center item mb-4 item-v2">
-          
-            <a href="{{url('/loginView')}}"> <img src="images/product_04.png" alt="Image"></a>
-            <h3 class="text-dark"><a href="{{url('/loginView')}}">Cetyl Pure</a></h3>
-            <p class="price"><del>₹45.00</del> &mdash;₹20.00</p>
-            <a href="{{url('/loginView')}}" class="btn btn-md btn-outline-primary" style="color:green;">Add to cart</a>
-            <a href="{{url('/loginView')}}" class="btn btn-md btn-primary" style="color:white;">Buy Now</a>
-          </div>
-          <div class="col-sm-6 col-lg-4 text-center item mb-4 item-v2">
-            <a href="{{url('/loginView')}}"> <img src="images/product_05.png" alt="Image"></a>
-            <h3 class="text-dark"><a href="{{url('/loginView')}}">CLA Core</a></h3>
-            <p class="price">₹38.00</p>
-            <a href="{{url('/loginView')}}" class="btn btn-md btn-outline-primary" style="color:green;">Add to cart</a>
-            <a href="{{url('/loginView')}}" class="btn btn-md btn-primary" style="color:white;">Buy Now</a>
-          </div>
-          <div class="col-sm-6 col-lg-4 text-center item mb-4 item-v2">
-            <span class="onsale">Sale</span>
-            <a href="{{url('/loginView')}}"> <img src="images/product_06.png" alt="Image"></a>
-            <h3 class="text-dark"><a href="{{url('/loginView')}}">Poo Pourri</a></h3>
-            <p class="price"><del>₹89</del> &mdash; ₹38.00</p>
-            <a href="{{url('/loginView')}}" class="btn btn-md btn-outline-primary" style="color:green;">Add to cart</a>
-            <a href="{{url('/loginView')}}" class="btn btn-md btn-primary" style="color:white;">Buy Now</a>
+          <div class="title-section text-center col-12">
+            <h2>Pharmacy <strong class="text-primary">Products</strong></h2>
           </div>
         </div>
-        <div class="row mt-5">
-          <div class="col-md-12 text-center">
-            <div class="site-block-27">
-              <ul>
-                <li><a href="{{url('/shop')}}">&lt;</a></li>
-                <li class="active"><span>1</span></li>
-                <li><a href="{{url('/shop')}}">2</a></li>
-                <li><a href="{{url('/shop')}}">3</a></li>
-                <li><a href="{{url('/shop')}}">4</a></li>
-                <li><a href="{{url('/shop')}}">5</a></li>
-                <li><a href="{{url('/shop')}}">&gt;</a></li>
-              </ul>
+        @if(isset($allMed))
+        <div class="row">
+          <div class="col-md-12 block-3 products-wrap">
+            <div class="nonloop-block-3 owl-carousel">
+            @foreach($allMed->all() as $med)
+              <div class="text-center item mb-4 item-v2">
+                <a href="shop-single.html"> <img src="{{$med->image}}" alt="Image"></a>
+
+                <div class="d-flex align-items-center justify-content-center mb-1">
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star-half-alt text-primary mr-1"></small>
+                            <small>({{$med->rate}})</small>
+                </div>
+                <h3 class="text-dark"><a href="shop-single.html">{{$med->name}}</a></h3>
+                <p class="price">₹{{$med->price}}</p>
+                <a href="{{url('/loginView')}}" class="btn btn-md btn-outline-primary" style="color:green;">Add to cart</a>
+                <a href="{{url('/loginView')}}" class="btn btn-md btn-primary" style="color:white;">Buy Now</a>
+              </div>
+            @endforeach
+            </div>
+          </div>
+        </div>
+        @endif
+      </div>
+    </div>
+
+
+    <div class="site-section bg-image overlay" style="background-image: url('images/hero_bg_2.jpg');">
+      <div class="container">
+        <div class="row justify-content-center text-center">
+         <div class="col-lg-7">
+           <h3 class="text-white">Sign up for discount up to 55% OFF</h3>
+           <p class="text-white">MediMart was created with a vision to serve people with a smile, to provide quality service over a virgin sector and become the industry leader in E-commerce healthcare.</p>
+           <p class="mb-0"><a href="{{url('/loginView')}}" class="btn btn-outline-white">Sign up</a></p>
+         </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-section">
+      <div class="container">
+        
+        <div class="row justify-content-between">
+          <div class="col-lg-6">
+            <div class="title-section">
+              <h2>Happy <strong class="text-primary">Customers</strong></h2>
+            </div>
+            <div class="block-3 products-wrap">
+            <div class="owl-single no-direction owl-carousel">
+        
+              <div class="testimony">
+                <blockquote>
+                  <img src="images/person_1.jpg" alt="Image" class="img-fluid">
+                  <p>&ldquo;MediMart is the digital pharmacy shop.
+                  We are a ONE-STOP ONLINE Healthcare Solutions where we not only provide a wide range of medicines, we also offer a wide choice of healthcare products including wellness products.&rdquo;</p>
+                </blockquote>
+
+                <p class="author">&mdash; Kelly Holmes</p>
+              </div>
+        
+              <div class="testimony">
+                <blockquote>
+                  <img src="images/person_2.jpg" alt="Image" class="img-fluid">
+                  <p>&ldquo;MediMart is the digital pharmacy shop.
+                  We are a ONE-STOP ONLINE Healthcare Solutions where we not only provide a wide range of medicines, we also offer a wide choice of healthcare products including wellness products.&rdquo;</p>
+                </blockquote>
+              
+                <p class="author">&mdash; Rebecca Morando</p>
+              </div>
+        
+              <div class="testimony">
+                <blockquote>
+                  <img src="images/person_3.jpg" alt="Image" class="img-fluid">
+                  <p>&ldquo;MediMart is the digital pharmacy shop.
+                  We are a ONE-STOP ONLINE Healthcare Solutions where we not only provide a wide range of medicines, we also offer a wide choice of healthcare products including wellness products.&rdquo;</p>
+                </blockquote>
+              
+                <p class="author">&mdash; Lucas Gallone</p>
+              </div>
+        
+              <div class="testimony">
+                <blockquote>
+                  <img src="images/person_4.jpg" alt="Image" class="img-fluid">
+                  <p>&ldquo;MediMart is the digital pharmacy shop.
+                  We are a ONE-STOP ONLINE Healthcare Solutions where we not only provide a wide range of medicines, we also offer a wide choice of healthcare products including wellness products.&rdquo;</p>
+                </blockquote>
+              
+                <p class="author">&mdash; Andrew Neel</p>
+              </div>
+        
+            </div>
+          </div>
+          </div>
+          <div class="col-lg-5">
+            <div class="title-section">
+              <h2 class="mb-5">Why <strong class="text-primary">Us</strong></h2>
+              <div class="step-number d-flex mb-4">
+                <span>1</span>
+                <p>MediMart was created with a vision to serve people with a smile, to provide quality service over a virgin sector and become the industry leader in E-commerce healthcare.</p>
+              </div>
+
+              <div class="step-number d-flex mb-4">
+                <span>2</span>
+                <p>MediMart was created with a vision to serve people with a smile, to provide quality service over a virgin sector and become the industry leader in E-commerce healthcare.</p>
+              </div>
+
+              <div class="step-number d-flex mb-4">
+                <span>3</span>
+                <p>MediMart was created with a vision to serve people with a smile, to provide quality service over a virgin sector and become the industry leader in E-commerce healthcare.</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- footer start -->
-    <footer class="site-footer bg-light">
+ <!-- footer start -->
+ <footer class="site-footer bg-light">
       <div class="container">
         <div class="row">
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
@@ -254,10 +280,98 @@
           <div class="col-lg-3 mx-auto mb-5 mb-lg-0">
             <h3 class="footer-heading mb-4">Navigation</h3>
             <ul class="list-unstyled">
-              <li><a href="#">Supplements</a></li>
-              <li><a href="#">Vitamins</a></li>
-              <li><a href="#">Diet &amp; Nutrition</a></li>
-              <li><a href="#">Tea &amp; Coffee</a></li>
+              <li><a href="{{url('/shop')}}">Supplements</a></li>
+              <li><a href="{{url('/shop')}}">Vitamins</a></li>
+              <li><a href="{{url('/shop')}}">Minerals</a></li>
+              <li><a href="#">Herbals</a></li>
+            </ul>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="block-5 mb-5">
+              <h3 class="footer-heading mb-4">Contact Info</h3>
+              <ul class="list-unstyled">
+                <li class="address">SaltLake, Sector-5, Kolkata, West Bengal</li>
+                <li class="phone"><a href="tel://23923929210">+91 3923929210</a></li>
+                <li class="email">medicine@medimart.com</li>
+              </ul>
+            </div>
+
+
+          </div>
+        </div>
+        <div class="row pt-5 mt-5 text-center">
+          <div class="col-md-12">
+            <p>
+              
+              Copyright &copy;
+              <script>document.write(new Date().getFullYear());</script> All rights reserved
+              with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank"
+                class="text-primary">MediMart</a>
+           
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </footer>
+
+    <!-- footer close -->
+
+
+   
+    <div class="site-section bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h2 class="text-black mb-4">Offices</h2>
+          </div>
+          <div class="col-lg-4">
+            <div class="p-4 bg-white mb-3 rounded">
+              <span class="d-block text-black h6 text-uppercase">New York</span>
+              <p class="mb-0">203 Fake St. Mountain View, San Francisco, California, USA</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="p-4 bg-white mb-3 rounded">
+              <span class="d-block text-black h6 text-uppercase">London</span>
+              <p class="mb-0">203 Fake St. Mountain View, San Francisco, California, USA</p>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="p-4 bg-white mb-3 rounded">
+              <span class="d-block text-black h6 text-uppercase">Canada</span>
+              <p class="mb-0">203 Fake St. Mountain View, San Francisco, California, USA</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+
+
+
+        <!-- footer start -->
+        <footer class="site-footer bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
+
+            <div class="block-7">
+              <h3 class="footer-heading mb-4">About <strong class="text-primary">MediMart</strong></h3>
+              <p>is the digital pharmacy shop.
+              We are a ONE-STOP ONLINE Healthcare Solutions where we not only provide a wide range of medicines, we also offer a wide choice of healthcare products including wellness products.</p>
+            </div>
+
+          </div>
+          <div class="col-lg-3 mx-auto mb-5 mb-lg-0">
+            <h3 class="footer-heading mb-4">Navigation</h3>
+            <ul class="list-unstyled">
+              <li><a href="{{url('/patMedView')}}">Supplements</a></li>
+              <li><a href="{{url('/patMedVit')}}">Vitamins</a></li>
+              <li><a href="{{url('/adminSupMin')}}">Minerals</a></li>
+              <li><a href="#">Herbals</a></li>
             </ul>
           </div>
 

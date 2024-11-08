@@ -2,11 +2,12 @@
 <html lang="en">
 
 <head>
-  <title>Pharmative &mdash; Colorlib Template</title>
+  <title>MediMart</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="fonts/icomoon/style.css">
 
   <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -25,7 +26,10 @@
 
 <body>
 
-  <div class="site-wrap">
+
+  <div class="justify-container">
+
+  <!-- nav bar start -->
 
 
     <div class="site-navbar py-2">
@@ -33,7 +37,7 @@
       <div class="search-wrap">
         <div class="container">
           <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
-          <form action="#" method="post">
+          <form action="#" method="POST">
             <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
           </form>
         </div>
@@ -43,78 +47,87 @@
         <div class="d-flex align-items-center justify-content-between">
           <div class="logo">
             <div class="site-logo">
-              <a href="index.html" class="js-logo-clone"><strong class="text-primary">Medi</strong>Mart</a>
+              <a href="{{url('/patHome')}}" class="js-logo-clone"><strong class="text-primary">Medi</strong>Mart</a>
             </div>
           </div>
           <div class="main-nav d-none d-lg-block">
             <nav class="site-navigation text-right text-md-center" role="navigation">
               <ul class="site-menu js-clone-nav d-none d-lg-block">
-                <li><a href="index.html">Home</a></li>
-                <li class="active"><a href="shop.html">Store</a></li>
+                <li><a href="{{url('/patHome')}}">Home</a></li>
+                <li><a href="{{url('/patMedView')}}">Store</a></li>
                 <li class="has-children">
-                  <a href="#">Products</a>
+                  <a>Products</a>
                   <ul class="dropdown">
-                    <li><a href="#">Supplements</a></li>
-                    <li class="has-children">
-                      <a href="#">Vitamins</a>
-                      <ul class="dropdown">
-                        <li><a href="#">Supplements</a></li>
-                        <li><a href="#">Vitamins</a></li>
-                        <li><a href="#">Diet &amp; Nutrition</a></li>
-                        <li><a href="#">Tea &amp; Coffee</a></li>
-                      </ul>
-                    </li>
-                    <li><a href="#">Diet &amp; Nutrition</a></li>
-                    <li><a href="#">Tea &amp; Coffee</a></li>
+                    <li><a class="bg-dark text-light" href="{{url('/patMedView')}}" >Supplements</a></li>
+                    
+                    <li><a href="{{url('/patMedVit')}}">Vitamins</a></li>
+                      
+                    
+                    <li><a href="{{url('/patMedMin')}}">Minerals</a></li>
+                    <li><a href="{{url('/patMedHer')}}">Herbal</a></li>
+                    <li><a href="{{url('/patMedPro')}}">Protein and Fitness</a></li>
+                    <li><a href="{{url('/patMedProbio')}}">Probiotics and Digestive</a></li>
+                    <li><a href="{{url('/patMedImu')}}">Imune System</a></li>
                     
                   </ul>
                 </li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="{{url('/patAbout')}}">About</a></li>
+                <li><a href="{{url('/contact')}}">Contact</a></li>
+                <li><a href="{{url('/order')}}">Order</a></li>
               </ul>
             </nav>
           </div>
           <div class="icons">
             <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
-            <a href="cart.html" class="icons-btn d-inline-block bag">
+            <a href="{{url('/cart')}}" class="icons-btn d-inline-block bag">
               <span class="icon-shopping-bag"></span>
-              <span class="number">2</span>
             </a>
-            <a href="#" class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span
-                class="icon-menu"></span></a>
+            
           </div>
+          <div class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                Patient
+                </button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="">My account</a>
+                <a class="dropdown-item" href="/logout">Log out</a>
+              </div>
+            </div>
         </div>
       </div>
     </div>
+
+
+    <!-- nav bar close -->
   
+@if(isset($med))
 
     <div class="bg-light py-3">
       <div class="container">
         <div class="row">
           <div class="col-md-12 mb-0"><a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> <a
-              href="shop.html">Store</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Ibuprofen Tablets, 200mg</strong></div>
+              href="shop.html">Store</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">{{$med->name}}</strong></div>
         </div>
       </div>
     </div>
-
+@if(session('message'))
+    <div class="alert alert-warning">
+            {{session('message')}}
+        </div>
+  @endif
     <div class="site-section">
       <div class="container">
         <div class="row">
           <div class="col-md-5 mr-auto">
             <div class="border text-center">
-              <img src="images/product_07_large.png" alt="Image" class="img-fluid p-5">
+              <img src="{{$med->image}}" alt="Image" class="img-fluid p-5">
             </div>
           </div>
           <div class="col-md-6">
-            <h2 class="text-black">Ibuprofen Tablets, 200mg</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur, vitae, explicabo? Incidunt facere, natus
-              soluta dolores iusto! Molestiae expedita veritatis nesciunt doloremque sint asperiores fuga voluptas,
-              distinctio, aperiam, ratione dolore.</p>
-            
+            <h2 class="text-black">{{$med->name}}</h2>
+            <p>{{$med->description}}</p>
+            <p><del>₹{{$med->price*0.97}}</del> <strong class="text-primary h4">₹{{$med->price}}</strong></p>
 
-            <p><del>$95.00</del>  <strong class="text-primary h4">$55.00</strong></p>
-
-            
             
             <div class="mb-5">
               <div class="input-group mb-3" style="max-width: 220px;">
@@ -127,10 +140,15 @@
                   <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
                 </div>
               </div>
-    
             </div>
-            <p><a href="cart.html" class="buy-now btn btn-sm height-auto px-4 py-3 btn-primary">Add To Cart</a></p>
-
+          
+            
+            <form action="{{url('/patCartView')}}" method="post">
+              @csrf
+              <input type="hidden" name="mid" value="{{$med->id}}">
+              <input class="buy-now btn btn-sm height-auto px-4 py-3 btn-primary" type="submit" value="Add to Cart">
+            </form>
+        
             <div class="mt-5">
               <ul class="nav nav-pills mb-3 custom-pill" id="pills-tab" role="tablist">
                 <li class="nav-item">
@@ -199,43 +217,33 @@
             
               </div>
             </div>
-
     
           </div>
         </div>
       </div>
     </div>
+@endif
 
-    <div class="site-section bg-image overlay" style="background-image: url('images/hero_bg_2.jpg');">
-      <div class="container">
-        <div class="row justify-content-center text-center">
-         <div class="col-lg-7">
-           <h3 class="text-white">Sign up for discount up to 55% OFF</h3>
-           <p class="text-white">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo omnis voluptatem consectetur quam.</p>
-           <p class="mb-0"><a href="#" class="btn btn-outline-white">Sign up</a></p>
-         </div>
-        </div>
-      </div>
-    </div>
-    <footer class="site-footer bg-light">
+     <!-- footer start -->
+     <footer class="site-footer bg-light">
       <div class="container">
         <div class="row">
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
 
             <div class="block-7">
-              <h3 class="footer-heading mb-4">About <strong class="text-primary">Pharmative</strong></h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius quae reiciendis distinctio voluptates
-                sed dolorum excepturi iure eaque, aut unde.</p>
+              <h3 class="footer-heading mb-4">About <strong class="text-primary">MediMart</strong></h3>
+              <p>is the digital pharmacy shop.
+              We are a ONE-STOP ONLINE Healthcare Solutions where we not only provide a wide range of medicines, we also offer a wide choice of healthcare products including wellness products.</p>
             </div>
 
           </div>
           <div class="col-lg-3 mx-auto mb-5 mb-lg-0">
             <h3 class="footer-heading mb-4">Navigation</h3>
             <ul class="list-unstyled">
-              <li><a href="#">Supplements</a></li>
-              <li><a href="#">Vitamins</a></li>
-              <li><a href="#">Diet &amp; Nutrition</a></li>
-              <li><a href="#">Tea &amp; Coffee</a></li>
+              <li><a href="{{url('/patMedView')}}">Supplements</a></li>
+              <li><a href="{{url('/patMedVit')}}">Vitamins</a></li>
+              <li><a href="{{url('/adminSupMin')}}">Minerals</a></li>
+              <li><a href="#">Herbals</a></li>
             </ul>
           </div>
 
@@ -243,9 +251,9 @@
             <div class="block-5 mb-5">
               <h3 class="footer-heading mb-4">Contact Info</h3>
               <ul class="list-unstyled">
-                <li class="address">203 Fake St. Mountain View, San Francisco, California, USA</li>
-                <li class="phone"><a href="tel://23923929210">+2 392 3929 210</a></li>
-                <li class="email">emailaddress@domain.com</li>
+                <li class="address">SaltLake, Sector-5, Kolkata, West Bengal</li>
+                <li class="phone"><a href="tel://23923929210">+91 3923929210</a></li>
+                <li class="email">medicine@medimart.com</li>
               </ul>
             </div>
 
@@ -255,18 +263,20 @@
         <div class="row pt-5 mt-5 text-center">
           <div class="col-md-12">
             <p>
-              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+              
               Copyright &copy;
-              <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made
+              <script>document.write(new Date().getFullYear());</script> All rights reserved
               with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank"
-                class="text-primary">Colorlib</a>
-              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                class="text-primary">MediMart</a>
+           
             </p>
           </div>
 
         </div>
       </div>
     </footer>
+
+    <!-- footer close -->
   </div>
 
   <script src="js/jquery-3.3.1.min.js"></script>

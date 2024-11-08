@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="fonts/icomoon/style.css">
 
   <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -46,47 +47,56 @@
         <div class="d-flex align-items-center justify-content-between">
           <div class="logo">
             <div class="site-logo">
-              <a href="{{url('/home')}}" class="js-logo-clone"><strong class="text-primary">Medi</strong>Mart</a>
+              <a href="{{url('/adminHome')}}" class="js-logo-clone"><strong class="text-primary">Medi</strong>Mart</a>
             </div>
           </div>
           <div class="main-nav d-none d-lg-block">
             <nav class="site-navigation text-right text-md-center" role="navigation">
               <ul class="site-menu js-clone-nav d-none d-lg-block">
                 <li class="active"><a href="{{url('/adminHome')}}">Home</a></li>
-                <li><a href="{{url('/')}}">Company</a></li>
+                
                 <li class="has-children">
-                  <a>Medicine</a>
+                  <a>Products</a>
                   <ul class="dropdown">
-                    <li><a href="{{url('/shop')}}">Supplements</a></li>
+                    <li><a class="bg-dark text-light" href="{{url('/adminSup')}}" >Supplements</a></li>
                     
-                    <li><a href="{{url('/shop')}}">Vitamins</a></li>
+                    <li><a href="{{url('/adminSupVit')}}">Vitamins</a></li>
                       
                     
-                    <li><a href="{{url('/shop')}}">Diet &amp; Nutrition</a></li>
-                    <li><a href="{{url('/shop')}}">Tea &amp; Coffee</a></li>
-                    
+                    <li><a href="{{url('/adminSupMin')}}">Minerals</a></li>
+                    <li><a href="{{url('/adminSupHer')}}">Herbal</a></li>
+                    <li><a href="{{url('/adminSupPro')}}">Protein and Fitness</a></li>
+                    <li><a href="{{url('/adminSupProbio')}}">Probiotics and Digestive</a></li>
+                    <li><a href="{{url('/adminSupImu')}}">Imune System</a></li>
+            
                   </ul>
                 </li>
-                <li><a href="{{url('/about')}}">About</a></li>
-                <li><a href="{{url('/contact')}}">Message</a></li>
+                <li><a href="{{url('/adminAbout')}}">About</a></li>
+                <li><a href="{{url('/adminMsg')}}">Message</a></li>
                 <li><a href="{{url('/userInfo')}}">User Details</a></li>
-
+                <li class="has-children">
+                  <a>Orders</a>
+                  <ul class="dropdown">
+                    <li><a href="{{url('/orderPending')}}">Pending</a></li>
+                    <li><a href="{{url('/orderApprove')}}">Approved</a></li>
+                    <li><a href="{{url('/orderDeliver')}}">Delivered</a></li>
+            
+                  </ul>
               </ul>
             </nav>
           </div>
+         
           <div class="icons">
             <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
-            <a href="{{url('/loginView')}}" class="icons-btn d-inline-block bag">
-              <span class="icon-shopping-bag"></span>
-            </a>
+            
             </div>
             <div class="dropdown">
-              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+              <button class="btn btn-sm btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
                 Admin
                 </button>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">My account</a>
-                <a class="dropdown-item" href="#">Log out</a>
+                <a class="dropdown-item" href="{{url('/adminAccount')}}">My account</a>
+                <a class="dropdown-item" href="{{url('/logout')}}">Log out</a>
               </div>
             </div>
          
@@ -101,7 +111,7 @@
       
         <div class="row">
           <div class="col-md-12 mb-0">
-            <a href="{{url('/home')}}">Home</a> <span class="mx-2 mb-0">/</span>
+            <a href="{{url('/adminHome')}}">Home</a> <span class="mx-2 mb-0">/</span>
             <strong class="text-black">Accounts</strong>
           </div>
         </div>
@@ -125,17 +135,17 @@
         </div>
         @endif
 
-          <form action="" method="post" enctype="multipart/form-data">
+          <form action="{{url('/adminEditSub')}}" method="post" enctype="multipart/form-data">
             @csrf
-            <input type="hidden" name="eid" value="{{$$adminInfo->id}}">
+            <input type="hidden" name="eid" value="{{$adminInfo->id}}">
                 <div class="form-group row">
                     <label class="form-label" for="form3Example1m">Name</label>
-                      <input type="text" name="name" id="form3Example1m" class="form-control form-control-lg" value="{{$$adminInfo->name}}"/>
+                      <input type="text" name="name" id="form3Example1m" class="form-control form-control-lg" value="{{$adminInfo->name}}"/>
                 </div>
 
                 <div class="form-group row">
                     <label class="form-label" for="form3Example97">Email ID</label>
-                    <input type="email" name="email" id="form3Example97" class="form-control form-control-lg" value="{{$$adminInfo->email}}"/>
+                    <input type="email" name="email" id="form3Example97" class="form-control form-control-lg" value="{{$adminInfo->email}}"/>
                     
                   </div>
 
@@ -149,11 +159,11 @@
 
                     <div class="form-check form-check-inline mb-0 me-4">
                     <label class="form-check-label" for="femaleGender">Female</label>
-                      <input class="form-check-input" type="radio" name="gender" value="Female" id="femaleGender"/>
+                      <input class="form-check-input" type="radio" name="gender" value="Female" id="femaleGender" @if($adminInfo->gender=='Female') checked @endif/>
                     </div>
                     <div class="form-check form-check-inline mb-0 me-4">
                     <label class="form-check-label" for="maleGender">Male</label>
-                      <input class="form-check-input" type="radio" name="gender" value="Male" id="maleGender"/>
+                      <input class="form-check-input" type="radio" name="gender" value="Male" id="maleGender"@if($adminInfo->gender=='Male') checked @endif/>
                     </div>
                   </div>
 
@@ -167,23 +177,23 @@
                   <div class="col-md-6 mb-4">
                   <label class="form-label" for="form3Example8">State</label>
                     <select data-mdb-select-init name="state">
-                      <option value="">State</option>
-                      <option value="West bengal">West Bengal</option>
-                      <option value="Bihar">Bihar</option>
-                      <option value="Jharkhand">Jharkhand</option>
-                      <option value="Karnataka">Karnataka</option>
-                      <option value="Uttar Pradesh">Uttar Pradesh</option>
+                      <option value="" @if($adminInfo->state=='') selected @endif >State</option>
+                      <option value="West bengal" @if($adminInfo->state=='West Bengal') selected @endif >West Bengal</option>
+                      <option value="Bihar" @if($adminInfo->state=='Bihar') selected @endif >Bihar</option>
+                      <option value="Jharkhand" @if($adminInfo->state=='Jharkhand') selected @endif >Jharkhand</option>
+                      <option value="Karnataka" @if($adminInfo->state=='Karnataka') selected @endif >Karnataka</option>
+                      <option value="Uttar Pradesh" @if($adminInfo->state=='Uttar Pradesh') selected @endif >Uttar Pradesh</option>
                     </select>
 
                   </div>
                   <div class="col-md-6 mb-4">
                   <label class="form-label" for="form3Example8">City</label>
                     <select data-mdb-select-init name="city">
-                      <option value="">City</option>
-                      <option value="Kolkata">Kolkata</option>
-                      <option value="Howrah">Howrah</option>
-                      <option value="Durgapur">Durgapur</option>
-                      <option value="Purulia">Purulia</option>
+                      <option value="" @if($adminInfo->city=='') selected @endif >City</option>
+                      <option value="Kolkata" @if($adminInfo->city=='Kolkata') selected @endif>Kolkata</option>
+                      <option value="Howrah" @if($adminInfo->city=='Howrah') selected @endif>Howrah</option>
+                      <option value="Durgapur" @if($adminInfo->city=='Durgapur') selected @endif >Durgapur</option>
+                      <option value="Purulia" @if($adminInfo->city=='Purulia') selected @endif >Purulia</option>
                     </select>
 
                   </div>
@@ -223,10 +233,10 @@
           <div class="col-lg-3 mx-auto mb-5 mb-lg-0">
             <h3 class="footer-heading mb-4">Navigation</h3>
             <ul class="list-unstyled">
-              <li><a href="#">Supplements</a></li>
-              <li><a href="#">Vitamins</a></li>
-              <li><a href="#">Diet &amp; Nutrition</a></li>
-              <li><a href="#">Tea &amp; Coffee</a></li>
+              <li><a href="{{url('/adminSup')}}">Supplements</a></li>
+              <li><a href="{{url('/adminSupVit')}}">Vitamins</a></li>
+              <li><a href="{{url('/adminSupMin')}}">Minerals</a></li>
+              <li><a href="#">Herbals</a></li>
             </ul>
           </div>
 

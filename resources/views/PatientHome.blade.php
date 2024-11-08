@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="fonts/icomoon/style.css">
 
   <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -52,30 +53,33 @@
           <div class="main-nav d-none d-lg-block">
             <nav class="site-navigation text-right text-md-center" role="navigation">
               <ul class="site-menu js-clone-nav d-none d-lg-block">
-                <li class="active"><a href="{{url('/patView')}}">Home</a></li>
-                <li><a href="{{url('/shop')}}">Store</a></li>
+                <li class="active"><a href="{{url('/patHome')}}">Home</a></li>
+                <li><a href="{{url('/patMedView')}}">Store</a></li>
                 <li class="has-children">
                   <a>Products</a>
                   <ul class="dropdown">
-                    <li><a href="{{url('/shop')}}">Supplements</a></li>
+                    <li><a class="bg-dark text-light" href="{{url('/patMedView')}}" >Supplements</a></li>
                     
-                    <li><a href="{{url('/shop')}}">Vitamins</a></li>
+                    <li><a href="{{url('/patMedVit')}}">Vitamins</a></li>
                       
                     
-                    <li><a href="{{url('/shop')}}">Diet &amp; Nutrition</a></li>
-                    <li><a href="{{url('/shop')}}">Tea &amp; Coffee</a></li>
+                    <li><a href="{{url('/patMedMin')}}">Minerals</a></li>
+                    <li><a href="{{url('/patMedHer')}}">Herbal</a></li>
+                    <li><a href="{{url('/patMedPro')}}">Protein and Fitness</a></li>
+                    <li><a href="{{url('/patMedProbio')}}">Probiotics and Digestive</a></li>
+                    <li><a href="{{url('/patMedImu')}}">Imune System</a></li>
                     
                   </ul>
                 </li>
-                <li><a href="{{url('/about')}}">About</a></li>
+                <li><a href="{{url('/patAbout')}}">About</a></li>
                 <li><a href="{{url('/contact')}}">Contact</a></li>
-                <li><a href="{{url('/')}}">Order</a></li>
+                <li><a href="{{url('/order')}}">Order</a></li>
               </ul>
             </nav>
           </div>
           <div class="icons">
             <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
-            <a href="" class="icons-btn d-inline-block bag">
+            <a href="{{url('/cart')}}" class="icons-btn d-inline-block bag">
               <span class="icon-shopping-bag"></span>
             </a>
             
@@ -85,8 +89,8 @@
                 Patient
                 </button>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="">My account</a>
-                <a class="dropdown-item" href="#">Log out</a>
+                <a class="dropdown-item" href="{{url('/patAccount')}}">My account</a>
+                <a class="dropdown-item" href="/logout">Log out</a>
               </div>
             </div>
         </div>
@@ -112,7 +116,7 @@
                   </div>
                 </div>
                 
-                <p><a href="{{url('/shop')}}" class="btn btn-primary px-5 py-3">Shop Now</a></p>
+                <p><a href="{{url('/patMedView')}}" class="btn btn-primary px-5 py-3">Shop Now</a></p>
               </div>
             </div>
           </div>
@@ -131,7 +135,7 @@
                     <p>Country's Largest Medicine Shop</p>
                   </div>
                 </div>
-                <p><a href="{{url('/shop')}}" class="btn btn-primary px-5 py-3">Shop Now</a></p>
+                <p><a href="{{url('/patMedVit')}}" class="btn btn-primary px-5 py-3">Shop Now</a></p>
               </div>
             </div>
           </div>
@@ -181,53 +185,35 @@
             <h2>Pharmacy <strong class="text-primary">Products</strong></h2>
           </div>
         </div>
+        @if(isset($allMed))
         <div class="row">
           <div class="col-md-12 block-3 products-wrap">
             <div class="nonloop-block-3 owl-carousel">
-
+            @foreach($allMed->all() as $med)
               <div class="text-center item mb-4 item-v2">
-                <span class="onsale">Sale</span>
-                <a href="shop-single.html"> <img src="images/product_03.png" alt="Image"></a>
-                <h3 class="text-dark"><a href="shop-single.html"></a>Umcka ColdCare</h3>
-                <p class="price">₹170.00</p>
+                <a href="shop-single.html"> <img src="{{$med->image}}" alt="Image"></a>
+                <div class="d-flex align-items-center justify-content-center mb-1">
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star-half-alt text-primary mr-1"></small>
+                            <small>({{$med->rate}})</small>
+                </div>
+                <h3 class="text-dark"><a href="shop-single.html">{{$med->name}}</a></h3>
+                <p class="price">₹{{$med->price}}</p>
+                <a href="{{url('/patMedSingle')}}{{$med->id}}" class="btn btn-md btn-outline-primary" style="color:green;">Add to cart</a>
+                <a href="{{url('/patMedSingle')}}{{$med->id}}" class="btn btn-md btn-primary" style="color:white;">Buy Now</a>
               </div>
-
-              <div class="text-center item mb-4 item-v2">
-                <a href="shop-single.html"> <img src="images/product_01.png" alt="Image"></a>
-                <h3 class="text-dark"><a href="shop-single.html">Chanca Piedra</a></h3>
-                <p class="price">₹120.00</p>
-              </div>
-
-              <div class="text-center item mb-4 item-v2">
-                <span class="onsale">Sale</span>
-                <a href="shop-single.html"> <img src="images/product_02.png" alt="Image"></a>
-                <h3 class="text-dark"><a href="shop-single.html">CetlyPure</a></h3>
-                <p class="price">₹120.00</p>
-              </div>
-
-              <div class="text-center item mb-4 item-v2">
-                <a href="shop-single.html"> <img src="images/product_04.png" alt="Image"></a>
-                <h3 class="text-dark"><a href="shop-single.html">Umcka Cold Care</a></h3>
-                <p class="price">₹120.00</p>
-              </div>
-
+            @endforeach
             </div>
           </div>
         </div>
+        @endif
       </div>
     </div>
 
-    <div class="site-section bg-image overlay" style="background-image: url('images/hero_bg_2.jpg');">
-      <div class="container">
-        <div class="row justify-content-center text-center">
-         <div class="col-lg-7">
-           <h3 class="text-white">Sign up for discount up to 55% OFF</h3>
-           <p class="text-white">MediMart was created with a vision to serve people with a smile, to provide quality service over a virgin sector and become the industry leader in E-commerce healthcare.</p>
-           <p class="mb-0"><a href="{{url('/loginView')}}" class="btn btn-outline-white">Sign up</a></p>
-         </div>
-        </div>
-      </div>
-    </div>
+   
 
     <div class="site-section">
       <div class="container">
@@ -306,8 +292,8 @@
       </div>
     </div>
 
-    <!-- footer start -->
-    <footer class="site-footer bg-light">
+     <!-- footer start -->
+     <footer class="site-footer bg-light">
       <div class="container">
         <div class="row">
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
@@ -322,10 +308,10 @@
           <div class="col-lg-3 mx-auto mb-5 mb-lg-0">
             <h3 class="footer-heading mb-4">Navigation</h3>
             <ul class="list-unstyled">
-              <li><a href="#">Supplements</a></li>
-              <li><a href="#">Vitamins</a></li>
-              <li><a href="#">Diet &amp; Nutrition</a></li>
-              <li><a href="#">Tea &amp; Coffee</a></li>
+              <li><a href="{{url('/patMedView')}}">Supplements</a></li>
+              <li><a href="{{url('/patMedVit')}}">Vitamins</a></li>
+              <li><a href="{{url('/adminSupMin')}}">Minerals</a></li>
+              <li><a href="#">Herbals</a></li>
             </ul>
           </div>
 
@@ -345,7 +331,7 @@
         <div class="row pt-5 mt-5 text-center">
           <div class="col-md-12">
             <p>
-              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+              
               Copyright &copy;
               <script>document.write(new Date().getFullYear());</script> All rights reserved
               with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank"

@@ -36,6 +36,7 @@ class RegisterController extends Controller
         // return view("form")->with(['userInfo'=>$submitData]);
         return redirect('/loginView')->with('message','Registration successfull!!');
     }
+    
 
    
 }

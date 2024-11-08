@@ -8,125 +8,38 @@ use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
-
-    public function cart()
-    {
-        // Fetch all medicines from the database
-        $medicines = DB::table('medicines')->get();
-
-        return view('cart', compact('medicines'));
+    public function patStoreSingle($id){
+        $single=DB::table('medicines')->where('id','=',$id)->get();
+        return view('patStoreSingle')->with('med',$single[0]);
     }
 
-    public function addToCart($id)
-    {
-        // Fetch the medicine details from the database
-        $medicine = DB::table('medicines')->where('id', $id)->first();
-
-        // Initialize cart in session if not already done
-        if (!session()->has('cart')) {
-            session(['cart' => []]);
-        }
-
-        // Add medicine to cart
-        $cart = session('cart');
-        $cart[$id] = [
-            'id' => $medicine->id, // unique row ID
-            'name' => $medicine->name,
-            'price' => $medicine->price,
-            'quantity' => isset($cart[$id]) ? $cart[$id]['quantity'] + 1 : 1,
-            'attributes' => array(
-                'image'=>$medicine->image,
-                'company_name'=>$cmp
-            )
+    public function patCart(Request $req){
+        $userId= session()->get('session_id');
+        $mid=$req->input('mid');
+        $medData=DB::table('medicines')->where('id','=',$mid)->get();
+        $medName=$medData[0]->name;
+        $medPrice=$medData[0]->price;
+        $medImage=$medData[0]->image;
+        $insertCart=[
+            'name'=>$medName,
+            'user_id'=>$userId,
+            'med_id'=>$mid,
+            'price'=>$medPrice,
+            'image'=>$medImage
         ];
-
-        session(['cart' => $cart]);
-
-        return redirect()->route('cart')->with('success', 'Medicine added to cart!');
-    }
-    public function showCart()
-    {
-        $cart = session('cart', []);
-        return view('cart.show', compact('cart'));
+        DB::table('cart')->insert($insertCart);
+        return redirect('/cart')->with('message','Item added to cart');
     }
 
-    public function removeCart($id)
-    {
-        // Check if the cart exists in the session
-        if (session()->has('cart')) {
-            $cart = session('cart');
-
-            // Remove the item from the cart if it exists
-            if (isset($cart[$id])) {
-                unset($cart[$id]);
-                session(['cart' => $cart]);
-            }
-        }
-
-        return redirect()->route('cart.show')->with('success', 'Medicine removed from cart!');
+    public function cartView(){
+        $userId=session()->get('session_id');
+        $cartInfo = DB::table('cart')->where('user_id','=',$userId)->get();
+        return view('cart')->with('cart',$cartInfo);
     }
-    // public function addteocart($id){
-    //     $medicine = Medicine::findOrFail($id);
-    //     $cmp = $medicine->company->name;
-    //     //dd($medicine)
-    //     Cart::add(array(
-    //         'id' => $medicine->id, // inique row ID
-    //         'name' => $medicine->name,
-    //         'price' => $medicine->price,
-    //         'quantity' => 1,
-    //         'attributes' => array(
-    //             'image'=>$medicine->image,
-    //             'company_name'=>$cmp
-    //         )
-    //     ));
-    //     return redirect()->back();
-    // }
 
-    // public function checkout(){
-    //     $cartCollections = \Cart::getContent();
-    //     $totals = \Cart::getTotal();
-    //     return view('checkout',compact('cartCollections','totals'));
-    // }
+    public function cartRemove($id){
+        DB::table('cart')->where('id','=',$id)->delete();
+        return redirect('/cart'); 
+    }
 
-    // public function confirmcheckout(Request $request){
-    //     $val=Validator::make($request->all(),[
-    //         'city'=>'required|string|max:30',
-    //         'zipcode'=>'required|string|max:20',
-    //         'house'=>'required|string|max:30',
-    //         'road'=>'required|string|max:30',
-    //     ]);
-
-    //     if ($val->fails()){
-    //         return redirect()->back()->withInput()->withErrors($val);
-    //     }
-
-    //     $shipping=new Shipping_address();
-    //     $shipping->user_id= auth()->id();
-    //     $shipping->city=$request->city;
-    //     $shipping->zipcode=$request->zipcode;
-    //     $shipping->house=$request->house;
-    //     $shipping->road=$request->road;
-    //     $shipping->save();
-
-    //     $cartCollections = \Cart::getContent();
-    //     $totals = \Cart::getTotal();
-    //     $totalQuantity = \Cart::getTotalQuantity();
-    //     $name =[];
-    //     foreach ($cartCollections as $pd){
-    //         $name[] =[
-    //             'name'=>$pd->name,
-    //             'quantity'=>$pd->quantity,
-    //         ];
-    //     }
-    //     //dd($name);
-    //     $order =new Order();
-    //     $order->price=$totals;
-    //     $order->quantity=$totalQuantity;
-    //     $order->medicine_list=json_encode($name);
-    //     $order->user_id=Auth::id();
-    //     $order->save();
-
-    //     return redirect()->back()->with('success','Successfully Ordered');
-
-    // }
 }
