@@ -53,7 +53,7 @@
           <div class="main-nav d-none d-lg-block">
             <nav class="site-navigation text-right text-md-center" role="navigation">
               <ul class="site-menu js-clone-nav d-none d-lg-block">
-                <li class="active"><a href="{{url('/adminHome')}}">Home</a></li>
+                <li><a href="{{url('/adminHome')}}">Home</a></li>
                 
                 <li class="has-children">
                   <a>Products</a>
@@ -73,13 +73,14 @@
                 </li>
                 <li><a href="{{url('/adminAbout')}}">About</a></li>
                 <li><a href="{{url('/adminMsg')}}">Message</a></li>
-                <li><a href="{{url('/userInfo')}}">User Details</a></li>
+                <li class="active"><a href="{{url('/userInfo')}}">User Details</a></li>
                 <li class="has-children">
                   <a>Orders</a>
                   <ul class="dropdown">
                     <li><a href="{{url('/orderPending')}}">Pending</a></li>
                     <li><a href="{{url('/orderApprove')}}">Approved</a></li>
                     <li><a href="{{url('/orderDeliver')}}">Delivered</a></li>
+                    <li><a href="{{url('/orderCancel')}}">Cancelled</a></li>
             
                   </ul>
               </ul>
@@ -105,6 +106,7 @@
     </div>
 
     <!-- nav bar close -->
+
     @if(isset($order))
     <div class="bg-light py-3">
       <div class="container">
@@ -120,22 +122,22 @@
 
    
       <div class="site-section bg-light">
-            <div class="container">
-      <div class="row text-dark">
-      @foreach($order->all() as $or)
-      <div class="shadow card border-light mb-3" style="max-width: 18rem; margin-left: 2%; margin-top: 1%;">
-        <div><img src="{{$or->mImage}}" alt="Image" class="img-fluid"></div>
-        <div class="card-header font-weight-bold">{{$or->mName}}</div>
-        <div class="card-body">
-          <h5 class="card-title">Price: ₹{{$or->mPrice}}</h5>
-          <p class="card-text">Medicine Id: {{$or->mid}}</p>
-          <p class="card-text">Status: {{$or->status}}</p>
+        <div class="container">
+          <div class="row text-dark">
+            @foreach($order->all() as $or)
+              <div class="shadow card border-light mb-3" style="max-width: 18rem; margin-left: 2%; margin-top: 1%;">
+                <div><img src="{{$or->mImage}}" alt="Image" class="img-fluid"></div>
+                <div class="card-header font-weight-bold">{{$or->mName}}</div>
+                <div class="card-body">
+                  <h5 class="card-title">Price: ₹{{$or->mPrice}}</h5>
+                  <p class="card-text">Medicine Id: {{$or->mid}}</p>
+                  <p class="card-text">Status: {{$or->status}}</p>
+                </div>
+              </div>
+            @endforeach
+          </div>
         </div>
       </div>
-      @endforeach
-</div>
-</div>
-</div>
       @endif
 
 

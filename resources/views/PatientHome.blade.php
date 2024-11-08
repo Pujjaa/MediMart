@@ -90,7 +90,7 @@
                 </button>
               <div class="dropdown-menu">
                 <a class="dropdown-item" href="{{url('/patAccount')}}">My account</a>
-                <a class="dropdown-item" href="/logout">Log out</a>
+                <a class="dropdown-item" href="{{url('/logout')}}">Log out</a>
               </div>
             </div>
         </div>

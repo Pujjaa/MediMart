@@ -11,6 +11,7 @@ class PatOrderController extends Controller
     public function orderView(){
         $userId=session()->get('session_id');
         $order=DB::table('order_details')->where('uid','=',$userId)->get();
+      
         return view('patOrder')->with('order',$order);
     }
     public function calOrder($id){

@@ -53,7 +53,7 @@
           <div class="main-nav d-none d-lg-block">
             <nav class="site-navigation text-right text-md-center" role="navigation">
               <ul class="site-menu js-clone-nav d-none d-lg-block">
-                <li class="active"><a href="{{url('/patHome')}}">Home</a></li>
+                <li><a href="{{url('/patHome')}}">Home</a></li>
                 <li><a href="{{url('/patMedView')}}">Store</a></li>
                 <li class="has-children">
                   <a>Products</a>
@@ -73,7 +73,7 @@
                 </li>
                 <li><a href="{{url('/patAbout')}}">About</a></li>
                 <li><a href="{{url('/contact')}}">Contact</a></li>
-                <li><a href="{{url('/order')}}">Order</a></li>
+                <li class="active"><a href="{{url('/order')}}">Order</a></li>
               </ul>
             </nav>
           </div>
@@ -89,8 +89,8 @@
                 Patient
                 </button>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="">My account</a>
-                <a class="dropdown-item" href="/logout">Log out</a>
+                <a class="dropdown-item" href="{{url('/patAccount')}}">My account</a>
+                <a class="dropdown-item" href="{{url('/logout')}}">Log out</a>
               </div>
             </div>
         </div>
@@ -115,7 +115,7 @@
     @endphp
 
 @if(isset($order))
-@if($order[0]->uid==$userId)
+
     <div class="site-section">
       <div class="container">
         <div class="row mb-5">
@@ -130,10 +130,10 @@
                     <th class="product-quantity">Quantity</th>
                     <th class="product-status">Status</th>
                     <th class="product-deliver">Address</th>
-                    @if($order[0]->status!='Cancelled')
+                  
                     <th class="product-action">Action</th>
 
-                    @endif
+                  
                   </tr>
                 </thead>
                
@@ -174,7 +174,7 @@
     </div>
     @else
     <h3 class="text-center text-dark">You have not placed any order yet...</h3>
-    @endif
+
 
   @endif
 

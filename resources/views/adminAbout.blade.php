@@ -80,6 +80,7 @@
                     <li><a href="{{url('/orderPending')}}">Pending</a></li>
                     <li><a href="{{url('/orderApprove')}}">Approved</a></li>
                     <li><a href="{{url('/orderDeliver')}}">Delivered</a></li>
+                    <li><a href="{{url('/orderCancel')}}">Cancelled</a></li>
             
                   </ul>
               </ul>

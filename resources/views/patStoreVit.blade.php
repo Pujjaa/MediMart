@@ -54,7 +54,7 @@
             <nav class="site-navigation text-right text-md-center" role="navigation">
               <ul class="site-menu js-clone-nav d-none d-lg-block">
                 <li><a href="{{url('/patHome')}}">Home</a></li>
-                <li><a href="{{url('/patMedView')}}">Store</a></li>
+                <li class="active"><a href="{{url('/patMedView')}}">Store</a></li>
                 <li class="has-children">
                   <a>Products</a>
                   <ul class="dropdown">
@@ -62,6 +62,7 @@
                     
                     <li><a href="{{url('/patMedVit')}}">Vitamins</a></li>
                       
+                    
                     <li><a href="{{url('/patMedMin')}}">Minerals</a></li>
                     <li><a href="{{url('/patMedHer')}}">Herbal</a></li>
                     <li><a href="{{url('/patMedPro')}}">Protein and Fitness</a></li>
@@ -88,8 +89,8 @@
                 Patient
                 </button>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="">My account</a>
-                <a class="dropdown-item" href="/logout">Log out</a>
+                <a class="dropdown-item" href="{{url('/patAccount')}}">My account</a>
+                <a class="dropdown-item" href="{{url('/logout')}}">Log out</a>
               </div>
             </div>
         </div>

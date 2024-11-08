@@ -89,7 +89,7 @@
                 Patient
                 </button>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="">My account</a>
+                <a class="dropdown-item" href="{{url('/patAccount')}}">My account</a>
                 <a class="dropdown-item" href="{{url('/logout')}}">Log out</a>
               </div>
             </div>

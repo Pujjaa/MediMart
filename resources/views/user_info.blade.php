@@ -80,6 +80,7 @@
                     <li><a href="{{url('/orderPending')}}">Pending</a></li>
                     <li><a href="{{url('/orderApprove')}}">Approved</a></li>
                     <li><a href="{{url('/orderDeliver')}}">Delivered</a></li>
+                    <li><a href="{{url('/orderCancel')}}">Cancelled</a></li>
             
                   </ul>
               </ul>
@@ -132,10 +133,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-6">
-            <!-- <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter by Order Price</h3>
-            <div id="slider-range" class="border-primary"></div>
-            <input type="text" name="text" id="amount" class="form-control border-0 pl-0 bg-white" disabled="" />
-          </div> -->
+           
           <div class="col-lg-6 text-lg-left">
             <h3 class="mb-3 h6 text-uppercase text-black d-block">Filter</h3>
             <button type="button" class="btn btn-primary btn-md dropdown-toggle px-4" id="dropdownMenuReference"

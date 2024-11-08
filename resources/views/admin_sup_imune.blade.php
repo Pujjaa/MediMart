@@ -53,7 +53,7 @@
           <div class="main-nav d-none d-lg-block">
             <nav class="site-navigation text-right text-md-center" role="navigation">
               <ul class="site-menu js-clone-nav d-none d-lg-block">
-                <li class="active"><a href="{{url('/adminHome')}}">Home</a></li>
+                <li><a href="{{url('/adminHome')}}">Home</a></li>
                 
                 <li class="has-children">
                   <a>Products</a>
@@ -80,6 +80,7 @@
                     <li><a href="{{url('/orderPending')}}">Pending</a></li>
                     <li><a href="{{url('/orderApprove')}}">Approved</a></li>
                     <li><a href="{{url('/orderDeliver')}}">Delivered</a></li>
+                    <li><a href="{{url('/orderCancel')}}">Cancelled</a></li>
             
                   </ul>
               </ul>
