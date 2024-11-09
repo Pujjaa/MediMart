@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+
+    //all user details
     public function userInfo(){
         $allData=DB::table('users')->where('role','=','Patient')->get();
         return view('user_info')->with(['allInfo'=>$allData]);
@@ -25,6 +27,7 @@ class UserController extends Controller
         return redirect('/userInfo')->with('message','User unblocked'); 
     }
 
+    //single user order details
     public function userOrder($oid){
         $order = DB::table('order_details')->where('uid','=',$oid)->get();
         $user =DB::table('users')->where('id','=',$oid)->first();

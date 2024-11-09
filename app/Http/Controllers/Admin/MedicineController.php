@@ -154,10 +154,12 @@ class MedicineController extends Controller
             $submit=DB::table('medicines')->where('id','=',$id)
                                           ->orWhere('category','=',$cat)
                                           ->update($editData);
+        if($submit){
+            return redirect()->back()->with('message','Update successful..');
+        }else{
+            return redirect()->back()->with('message','Not Updated');
+        }
     
-        // return redirect('/addProduct')->with('message','Added successful..');
     }
-    
-    
 
 }

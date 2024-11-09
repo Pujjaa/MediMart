@@ -8,11 +8,14 @@ use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
+
+    // Registration form view page
     public function regisView()
     {
         return view('register');
     }
 
+    // registration submit
     public function register(Request $req){
         $req->validate(
             [
@@ -32,12 +35,14 @@ class RegisterController extends Controller
             'state'=>$req->input('state'),
             'pincode'=>$req->input('pincode'),
         ]; 
-        DB::table('users')->insert($submitData);
-        // return view("form")->with(['userInfo'=>$submitData]);
-        return redirect('/loginView')->with('message','Registration successfull!!');
+        $sub = DB::table('users')->insert($submitData);
+        
+        if($sub){
+            return redirect('/loginView')->with('message','Registration successfull!!');
+        }else{
+            return redirect()->back()->with('message','Please enter valid details...');
+        }
     }
-    
 
-   
 }
 

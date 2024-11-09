@@ -8,21 +8,24 @@ use Illuminate\Support\Facades\DB;
 
 class PatientProfileController extends Controller
 {
+    //patient home page
     public function patHomeView(){
         $med=DB::table('medicines')->get();
         return view('PatientHome')->with(['allMed'=>$med]); 
     }
 
+    // patient about page
     public function patAboutView(){
         return view('patAbout');
     }
 
+    // patient contact form view page
     public function contactPage(){
         return view('contact');
     }
 
+    // patient contact submit 
     public function contact(Request $req){
-
         $req->validate(
             [
                 'fname'=>"required|regex:/^[a-zA-Z ]{3,30}$/",
@@ -36,9 +39,12 @@ class PatientProfileController extends Controller
             'subject'=>$req->input('subject'),
             'message'=>$req->input('message'),
         ]; 
-        DB::table('messages')->insert($contactData);
-        return redirect('/contact')->with('message','Message sent!!');
+        $sub = DB::table('messages')->insert($contactData);
+        if($sub){
+            return redirect('/contact')->with('message','Message sent!!');
+        }else{
+            return redirect('/contact')->with('message','Message not sent!!');
+        }
     }
-    
 
 }

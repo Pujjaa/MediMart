@@ -104,7 +104,7 @@
       </div>
     </div>
     @if(session('message'))
-        <div class="alert alert-success">
+        <div class="alert alert-warning">
             {{session('message')}}
         </div>
         @endif

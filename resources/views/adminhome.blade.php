@@ -106,6 +106,11 @@
     </div>
 
     <!-- nav bar close -->
+    @if(session('message'))
+        <div class="alert alert-warning">
+            {{session('message')}}
+        </div>
+    @endif
 
     <div class="owl-carousel owl-single px-0">
       <div class="site-blocks-cover overlay" style="background-image: url('images/hero_bg.jpg');">

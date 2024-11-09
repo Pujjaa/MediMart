@@ -118,7 +118,7 @@ Route::get('/removeCart{id}',[CartController::class,'cartRemove']);
 
 // patient order
 Route::get('/order',[PatOrderController::class,'orderView']);
-Route::get('/calcel{id}',[PatOrderController::class,'calOrder']);
+Route::get('/cancel{id}',[PatOrderController::class,'calOrder']);
 
 //checkout
 Route::get('/checkout',[CheckoutController::class,'checkoutView']);

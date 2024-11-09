@@ -8,16 +8,21 @@ use Illuminate\Support\Facades\DB;
 
 class PatientAccController extends Controller
 {
+    // patient account view page
     public function accountInfo(){
         $userId= session()->get('session_id');
         $patData=DB::table('users')->where('id','=',$userId)->get();
         return view('PatAccount')->with(['info'=>$patData[0]]);
     }
+
+    //patient account update view page
     public function patEditView(){
         $userId= session()->get('session_id');
         $patData=DB::table('users')->where('id','=',$userId)->first();
         return view('patEdit')->with(['info'=>$patData]);
     }
+
+    //patient account update submit 
     public function patEdit(Request $req){
         $userId= session()->get('session_id');
         $req->validate(
@@ -46,10 +51,12 @@ class PatientAccController extends Controller
         }
     }
 
+    //change password view page
     public function chnPass(){
         return view('PatChnPass');
     }
 
+    // change password submit 
     public function chnPassSub(Request $req){
 
         $req->validate([

@@ -113,6 +113,22 @@
     </div>
 
     <!-- section start -->
+
+    @if(session('message'))
+        <div class="alert alert-warning">
+            {{session('message')}}
+        </div>
+        @endif
+
+        @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $er)
+                <li>{{$er}}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
    
     <div class="site-section">
       <div class="container">

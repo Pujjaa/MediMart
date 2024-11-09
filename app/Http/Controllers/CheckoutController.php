@@ -9,16 +9,19 @@ use Illuminate\Support\Facades\DB;
 class CheckoutController extends Controller
 {
 
+    // checkout page
     public function checkoutView(){
         $userId=session()->get('session_id');
         $cartInfo = DB::table('cart')->where('user_id','=',$userId)->get();
         return view('checkout')->with('cart',$cartInfo);
     }
 
+    //order placed view
     public function orderPlaced(){
         return view('thankyou');
     }
     
+    //order submit
     public function checkoutSub(Request $req){
         $userId=session()->get('session_id');
         $req->validate(
@@ -52,10 +55,13 @@ class CheckoutController extends Controller
             'email'=>$req->input('email'),
             'phone'=>$req->input('phone')
         ]; 
-        DB::table('order_details')->insert($submitData);
-        return redirect('/thankYou');
+        $submit =DB::table('order_details')->insert($submitData);
+
+        if($submit){
+            return redirect('/thankYou');
+        }else{
+            return redirect()->back()->with('message','Please enter valid information..');
+        }
     }
-    
-    
     
 }

@@ -110,73 +110,43 @@
         </div>
       </div>
     </div>
-    @php
-        $userId=session()->get('session_id');
-    @endphp
-
-@if(isset($order))
-
-    <div class="site-section">
-      <div class="container">
-        <div class="row mb-5">
-          <form class="col-md-12" action="" method="post">
-            <div class="site-blocks-table">
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th class="product-thumbnail">Image</th>
-                    <th class="product-name">Product</th>
-                    <th class="product-price">Price</th>
-                    <th class="product-quantity">Quantity</th>
-                    <th class="product-status">Status</th>
-                    <th class="product-deliver">Address</th>
-                  
-                    <th class="product-action">Action</th>
-
-                  
-                  </tr>
-                </thead>
-               
-
-                <tbody>
-                  @foreach($order->all() as $or)
-                  @if($or->uid==$userId)
-                  <tr>
-                    <td class="product-thumbnail">
-                      <img src="{{$or->mImage}}" alt="Image" class="img-fluid">
-                    </td>
-                    <td class="product-name">
-                      <h2 class="h5 text-black">{{$or->mName}}</h2>
-                    </td>
-                    <td>{{$or->mPrice}}</td>
-                    <td>1</td>
-                    
-                    <td>{{$or->status}}</td>
-                    <td>{{$or->address}}</td>
-                    @if($or->status!='Cancelled')
-                    <td><a href="{{url('/calcel')}}{{$or->id}}" class="btn btn-primary">Cancel</a></td>
-                    @else
-                    <td><a class="btn btn-primary disabled">Cancel</a></td>
-                    @endif
-                  </tr>
-                 
-                 @endif
-                @endforeach
-                 
-                </tbody>
-              </table>
-            </div>
-          </form>
-        </div>
     
-       
-      </div>
-    </div>
-    @else
-    <h3 class="text-center text-dark">You have not placed any order yet...</h3>
+
+    @if(session('message'))
+        <div class="alert alert-order">
+            {{session('message')}}
+        </div>
+        @endif
+
+    @if(isset($order))
+      <div class="site-section bg-light">
+            <div class="container">
+              <div class="row text-dark">
+                  @foreach($order->all() as $or)
+                    <div class="shadow card border-light mb-3" style="max-width: 18rem; margin-left: 2%; margin-top: 1%;">
+                      <div><img src="{{$or->mImage}}" alt="Image" class="img-fluid"></div>
+                      <div class="card-header font-weight-bold">{{$or->mName}}</div>
+                      <div class="card-body">
+                        <h5 class="card-title">Price: ₹{{$or->mPrice}}</h5>
+                        <p class="card-text">Address: {{$or->address}}</p>
+                        <p class="card-text">Status: {{$or->status}}</p>
+                        @if($or->status!='Cancelled')
+                        <a href="{{url('/cancel')}}{{$or->id}}" class="btn btn-sm btn-outline-primary">Cancel</a>
+                        @else
+                          <a class="btn btn-primary disabled">Cancel</a>
+                        @endif
+                       
+                      </div>
+                    </div>
+                  @endforeach
+              </div>
+          </div>
+        </div>
+        @else
+          <h3 class="text-center text-dark">You have not placed any order yet...</h3>
+        @endif
 
 
-  @endif
 
       <!-- footer start -->
 

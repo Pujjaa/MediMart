@@ -13,11 +13,12 @@ header('Expires: 0');
 class LoginController extends Controller
 {
     
+    // login form page
     public function loginView(){
         return view('login');
     }
    
-
+    // login submit
     public function login(Request $req){
         $userName=$req->input('email');
         $password=$req->input('password');
@@ -33,11 +34,11 @@ class LoginController extends Controller
                 if($password==$dbPassword && $user=='Admin'){
                     $uid=$loginData[0]->id;
                     $req->session()->put('session_id',$uid);
-                    return redirect('/adminHome');
+                    return redirect('/adminHome')->with('message','Logged in..');
                 }elseif($password==$dbPassword){
                     $uid=$loginData[0]->id;
                     $req->session()->put('session_id',$uid);
-                    return redirect('/patHome');
+                    return redirect('/patHome')->with('message','Logged in..');
                 }else{
                     return redirect('/loginView')->with('message','Wrong Password');
                 }
@@ -47,14 +48,16 @@ class LoginController extends Controller
         }                               
     }
 
+    //Account delete
     public function deleteAccount(){
         $uid = session()->get('session_id');
         DB::table('users')->where('id','=',$uid)->delete();
-        return redirect('/loginView'); 
         DB::table('order_details')->where('uid','=',$uid)->delete();
         DB::table('cart')->where('user_id','=',$uid)->delete();
+        return redirect('/loginView')->with('message','Your account is delete..'); 
     }
 
+    // logged out
     public function logout(Request $req){
         $req->session()->invalidate();
         $req->session()->flush();

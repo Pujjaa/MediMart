@@ -110,41 +110,29 @@
         </div>
       </div>
     </div>
-@if(isset($cart))
-    <div class="site-section">
-      <div class="container">
-        <div class="row mb-5">
-          <form class="col-md-12" action="" method="post">
-            <div class="site-blocks-table">
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th class="product-thumbnail">Image</th>
-                    <th class="product-name">Product</th>
-                    <th class="product-price">Price</th>
-                    <th class="product-quantity">Quantity</th>
-                    <th class="product-total">Total</th>
-                    <th class="product-remove">Remove</th>
-                  </tr>
-                </thead>
-                @php
+
+    @if(session('message'))
+        <div class="alert alert-warning">
+            {{session('message')}}
+        </div>
+        @endif
+
+
+    @if(isset($cart))
+      <div class="site-section bg-light">
+            <div class="container">
+              <div class="row text-dark">
+              @php
                 $total=0;
                 $userId=session()->get('session_id');
-                @endphp
-
-                <tbody>
+              @endphp
                   @foreach($cart->all() as $crt)
-                  @if($crt->user_id==$userId)
-                  <tr>
-                    <td class="product-thumbnail">
-                      <img src="{{$crt->image}}" alt="Image" class="img-fluid">
-                    </td>
-                    <td class="product-name">
-                      <h2 class="h5 text-black">{{$crt->name}}</h2>
-                    </td>
-                    <td> ₹{{$crt->price}}</td>
-                    <td>
-                      <div class="input-group mb-3" style="max-width: 120px;">
+                    <div class="shadow card border-light mb-3" style="max-width: 18rem; margin-left: 2%; margin-top: 1%;">
+                      <div><img src="{{$crt->image}}" alt="Image" class="img-fluid"></div>
+                      <div class="card-header font-weight-bold">{{$crt->name}}</div>
+                      <div class="card-body">
+                        <h5 class="card-title">Price: ₹{{$crt->price}}</h5>
+                        <div class="input-group mb-3" style="max-width: 120px;">
                         <div class="input-group-prepend">
                           <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
                         </div>
@@ -154,25 +142,19 @@
                           <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
                         </div>
                       </div>
-    
-                    </td>
-                    @php
-                    $crtPrice=$crt->price;
-                    $total=$total+$crtPrice;
-                    @endphp
-                    <td>{{$total}}</td>
-                    <td><a href="{{url('/removeCart')}}{{$crt->id}}" class="btn btn-primary height-auto btn-sm">X</a></td>
-                  </tr>
-                 
-                 @endif
-                @endforeach
-                 
-                </tbody>
-              </table>
-            </div>
-          </form>
+                        @php
+                            $crtPrice=$crt->price;
+                            $total=$total+$crtPrice;
+                        @endphp
+                        <a href="{{url('/removeCart')}}{{$crt->id}}" class="btn btn-sm btn-outline-primary">Remove</a>
+                      </div>
+                    </div>
+                  @endforeach
+              </div>
+          </div>
         </div>
-    
+  
+    <div class="container">
         <div class="row">
           <div class="col-md-6">
             <div class="row mb-5">
@@ -196,6 +178,8 @@
               </div>
             </div>
           </div>
+
+          
           <div class="col-md-6 pl-5">
             <div class="row justify-content-end">
               <div class="col-md-7">
@@ -209,7 +193,7 @@
                     <span class="text-black">Subtotal</span>
                   </div>
                   <div class="col-md-6 text-right">
-                    <strong class="text-black">{{$total}}</strong>
+                    <strong class="text-black">₹{{$total}}</strong>
                   </div>
                 </div>
                 <div class="row mb-5">
@@ -217,7 +201,7 @@
                     <span class="text-black">Total</span>
                   </div>
                   <div class="col-md-6 text-right">
-                    <strong class="text-black">{{$total}}</strong>
+                    <strong class="text-black">₹{{$total}}</strong>
                   </div>
                 </div>
     
@@ -232,7 +216,7 @@
           </div>
         </div>
       </div>
-    </div>
+     
   @endif
 
       <!-- footer start -->

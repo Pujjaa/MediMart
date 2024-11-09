@@ -117,33 +117,34 @@
         </div>
       </div>
     </div>
-
-
+    @if(session('message'))
+        <div class="alert alert-warning">
+            {{session('message')}}
+        </div>
+    @endif
 
       @if(isset($approve))
       <div class="site-section bg-light">
             <div class="container">
-      <div class="row text-dark">
-      @foreach($approve->all() as $app)
-      <div class="shadow card border-light mb-3" style="max-width: 18rem; margin-left: 2%; margin-top: 1%;">
-        <div>
-        <img src="{{$app->mImage}}" alt="Image" class="img-fluid">
+              <div class="row text-dark">
+                  @foreach($approve->all() as $app)
+                    <div class="shadow card border-light mb-3" style="max-width: 18rem; margin-left: 2%; margin-top: 1%;">
+                      <div><img src="{{$app->mImage}}" alt="Image" class="img-fluid"></div>
+                      <div class="card-header font-weight-bold">{{$app->mName}}</div>
+                      <div class="card-body">
+                        <h5 class="card-title">Price: ₹{{$app->mPrice}}</h5>
+                        <p class="card-text">Medicine Id: {{$app->mid}}</p>
+                        <p class="card-text">User Id: {{$app->uid}}</p>
+                        <p class="card-text">User Name: {{$app->name}}</p>
+                        <p class="card-text">Status: {{$app->status}}</p>
+                        <span class="card-text">Change Status:</span>
+                        <a href="{{url('/approve')}}{{$app->id}}" class="btn btn-sm btn-outline-primary">Deliver</a>
+                      </div>
+                    </div>
+                  @endforeach
+              </div>
+          </div>
         </div>
-        <div class="card-header font-weight-bold">{{$app->mName}}</div>
-        <div class="card-body">
-          <h5 class="card-title">Price: ₹{{$app->mPrice}}</h5>
-          <p class="card-text">Medicine Id: {{$app->mid}}</p>
-          <p class="card-text">User Id: {{$app->uid}}</p>
-          <p class="card-text">User Name: {{$app->name}}</p>
-          <p class="card-text">Status: {{$app->status}}</p>
-          <span class="card-text">Change Status:</span>
-          <a href="{{url('/approve')}}{{$app->id}}" class="btn btn-sm btn-outline-primary">Deliver</a>
-        </div>
-      </div>
-      @endforeach
-</div>
-</div>
-
       @endif
             
 
